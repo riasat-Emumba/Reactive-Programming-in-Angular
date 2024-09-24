@@ -1,0 +1,13 @@
+
+$d-Flex : flex;
+mat-toolbar {
+  display: $d-Flex;
+  justify-content: space-between;
+  height: 50px;
+
+  .button-group {
+    display: $d-Flex;
+    gap: 10px;
+  }
+
+}

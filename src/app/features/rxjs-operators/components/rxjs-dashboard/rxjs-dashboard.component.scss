@@ -1,0 +1,12 @@
+$primary-color: lightblue;
+$hover-color: rgba(123, 152, 77, 0.641);
+  
+mat-grid-tile {
+  background: $primary-color;
+  transition: background 0.3s ease; 
+
+  &:hover {
+      cursor: pointer;
+      background: $hover-color;
+  }
+}

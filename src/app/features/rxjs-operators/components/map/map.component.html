@@ -1,0 +1,39 @@
+<h3 class="mb-1"><b>Map operator</b></h3>
+<p>We can transform our data with Map operator. 
+    With observables we need pipe to use map while with arrays and iterables we donot need pipe operator.</p>
+    <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              User's Data
+            </div>
+            <div class="card-body">
+              <ng-container *ngIf="originalUsers$ | async as originalUsers">
+                <ul class="list-group">
+                  <li *ngFor="let user of originalUsers" class="list-group-item">
+                    <app-user-detail [user]="user"></app-user-detail>
+                  </li>
+                </ul>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Modified User's Data
+            </div>
+            <div class="card-body">
+              <ng-container *ngIf="transformedUsers$ | async as transformedUsers">
+                <ul class="list-group">
+                  <li *ngFor="let user of transformedUsers" class="list-group-item">
+                    <app-user-detail [user]="user"></app-user-detail>
+                  </li>
+                </ul>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      

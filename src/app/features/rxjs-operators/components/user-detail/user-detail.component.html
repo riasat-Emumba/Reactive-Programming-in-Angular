@@ -1,0 +1,29 @@
+<div *ngIf="user" class="user-details">
+    <div class="row mb-1">
+      <div class="col-md-4"><strong>User ID:</strong></div>
+      <div class="col-md-8 text-end">{{ user.id }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="user.fullName">
+      <div class="col-md-4"><strong>Name:</strong></div>
+      <div class="col-md-8 text-end">{{ user.fullName }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="user.firstname && user.lastname">
+      <div class="col-md-4"><strong>First Name:</strong></div>
+      <div class="col-md-8 text-end">{{ user.firstname }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="user.firstname && user.lastname">
+      <div class="col-md-4"><strong>Last Name:</strong></div>
+      <div class="col-md-8 text-end">{{ user.lastname }}</div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-md-4"><strong>Membership:</strong></div>
+      <div class="col-md-8 text-end">{{ user.membershiplevel || user.membershipLevel }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="user.discount">
+      <div class="col-md-4"><strong>Discount:</strong></div>
+      <div class="col-md-8 text-end">
+        <span class="badge bg-success">{{ user.discount }}</span>
+      </div>
+    </div>
+  </div>
+  

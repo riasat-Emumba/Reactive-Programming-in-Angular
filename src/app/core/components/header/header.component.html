@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  {{title}}
+ <ng-content></ng-content>
+  <nav *ngIf="isLoggedIn" class="button-group">
+    <button mat-raised-button (click)="navigateToRxjsDashboard()" >RxJs Operators</button>
+    <button mat-raised-button (click)="navigateToPromiseDashboard()" >Promises</button>
+    <button mat-raised-button (click)="navigateToHome()" >Home</button>
+    <button mat-raised-button (click)="logOut()" >LogOut</button>
+    <!-- <nav>
+      <a mat-button (click)="navigateToRxjsDashboard()" >RxJs Operators</a>
+      <a mat-button (click)="navigateToPromiseDashboard()" >Promises</a>
+      <a mat-button (click)="navigateToHome()" >Home</a>
+      <a mat-button (click)="logOut()" >LogOut</a>
+    </nav> -->
+  </nav>
+</mat-toolbar>

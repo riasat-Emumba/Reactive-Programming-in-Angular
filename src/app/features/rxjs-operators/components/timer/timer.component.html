@@ -1,0 +1,24 @@
+<h3 class="mb-0"><b>Timer</b></h3>
+<p>Timer is combination of delay + Interval. It will not execute untill the dealy time. After that it keeps on emitting values until unsubscribe as we do with interval. </p>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Uploading Videos</div>
+            <div class="card-body">
+                <ul *ngFor="let video of broadCastedVideoList">
+                    <li>{{video}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Total Videos</div>
+            <div class="card-body">
+                    <p>{{totalPublishedVideos}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

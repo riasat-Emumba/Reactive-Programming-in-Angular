@@ -1,0 +1,33 @@
+<h3 class="mb-1"><b>Retry & RetryWhen (scan & Delay)</b></h3>
+<p>Mainly used for api calls. If failed it tries for the given number of times. 
+    It calls the api again if failed for given Times but in RetryWhen we can call api after some delay and by adding some custom logic.</p>
+<br>
+<div class="row">
+
+    <div class="col-md-6">
+        <strong>Example 1</strong>
+        <hr>
+        <table class="table table-striped" *ngIf="person!=null">
+            <tr>
+                <th>Id</th>
+                <td>{{person.id}}</td>
+            </tr>
+            <tr>
+
+                <th>Name</th>
+                <td>{{person.title}}</td>
+            </tr>
+            <tr>
+                <th>Completed</th>
+                <td>{{person.completed}}</td>
+
+            </tr>
+
+        </table>
+        <button class="btn btn-primary" (click)="getUserDetails()">Get User Details</button>
+        <p class="mt-2"> Status :<strong>{{status}}</strong></p>
+    </div>
+
+
+
+</div>

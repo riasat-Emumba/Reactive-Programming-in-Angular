@@ -1,0 +1,27 @@
+<h4><b>Promise vs Observables</b></h4>
+<h4><b>Differences</b></h4>
+<p>Promise</p>
+<ul>
+    <li>Async</li>
+    <li>Return Single Value
+        <ol>
+            <li>resolve(Yes)</li>
+            <li>rejext(No)</li>
+        </ol>
+    </li>
+</ul>
+<p>Observables</p>
+<ul>
+    <li>Async or sync </li>
+    <li>Return stream of values</li>
+</ul>
+<hr>
+<h4 class="mb-2"><b>Example 2</b></h4>
+<button class="mb-2" mat-flat-button color="primary" (click)="getAllUsers()">Get User Data</button>
+<p class="mb-2"><b>Result: </b> <span>{{promiseResultExample2}}</span>
+<p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample2}}</span>
+    <hr>
+<h4 class="mb-2"><b>Example 3</b></h4>
+<button class="mb-2" mat-flat-button color="primary" (click)="getError()">Get User Data</button>
+<p class="mb-2"><b>Result: </b> <span>{{promiseResultExample3}}</span>
+<p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample3}}</span>

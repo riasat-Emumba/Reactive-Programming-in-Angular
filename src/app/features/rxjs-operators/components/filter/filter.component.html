@@ -1,0 +1,79 @@
+<h3 class="mb-0"><b>Filter Operator</b></h3>
+<p>Timer is combination of delil unsubscribe as we do with interval. </p>
+<br>
+<div class="row">
+
+    <div class="col-md-4">
+        <strong>Example 1</strong>
+        <hr>
+        <p class="bg-light py-2 px-3 border rounded">
+            <strong>Filter :</strong> by name length
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of userDataByNameLength">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.gender}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <strong>Example 2</strong>
+        <hr>
+        <p class="bg-light py-2 px-3 border rounded">
+            <strong>Filter :</strong> by Gender
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of userDataByGender">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.gender}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+
+        <strong>Example 3</strong>
+        <hr>
+        <p class="bg-light py-2 px-3 border rounded">
+            <strong>Filter :</strong> by nth Item
+        </p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of userDataByNthItem">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.gender}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

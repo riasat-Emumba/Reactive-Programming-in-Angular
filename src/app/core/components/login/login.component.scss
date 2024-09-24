@@ -1,0 +1,18 @@
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 140px); 
+
+    .card-border {
+        border: 1px solid rgb(102, 78, 78);
+
+        .set-content {
+            padding: 20px; 
+        }
+
+        .w-full {
+            width: 100%; 
+        }
+    }
+}
