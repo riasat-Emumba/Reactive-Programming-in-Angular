@@ -20,6 +20,9 @@ import { ConcatMapComponent } from './components/concat-map/concat-map.component
 import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
 import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
 import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
+import { ShareReplyComponent } from './components/share-reply/share-reply.component';
+import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
+import { ZipComponent } from './components/zip/zip.component';
 
 const routes: Routes = [
   { path: '', component: RxjsDashboardComponent },
@@ -42,6 +45,9 @@ const routes: Routes = [
   { path: 'compare-maps', component: CompareMapsComponent },
   { path: 'map-in-action', component: MapsInActionComponent },
   { path: 'exhaust-map', component: ExhaustMapComponent },
+  { path: 'share-reply', component: ShareReplyComponent },
+  { path: 'combine-latest', component: CombineLatestComponent },
+  { path: 'zip-fork-join', component: ZipComponent },
 
 
 ];

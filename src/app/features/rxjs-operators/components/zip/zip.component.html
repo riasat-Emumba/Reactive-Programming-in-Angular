@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4"><strong>Zip & ForkJoin</strong></h2>
+    <div class="alert alert-info">
+        <p class="mb-1">Zip is an RxJS operator that combines multiple observables to create an observable whose values are arrays of the values from each input observable, emitted only when all input observables have emitted at least one value.</p>
+        <p>ForkJoin is another RxJS operator that combines multiple observables to create an observable that emits an array of the last values emitted by each input observable, only when all input observables have completed.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Names</strong></h5>
+                    <hr>
+                    <select class="form-control mb-3" #name>
+                        <option *ngFor="let name of nameSource" value="{{name}}">{{name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Colors</strong></h5>
+                    <hr>
+                    <select class="form-control" #color>
+                        <option *ngFor="let color of colorSource" value="{{color}}">{{color}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Zip</strong></h5>
+                    <hr>
+                    <div class="wrapper d-flex flex-wrap" id="zipContainer">
+                        <!-- Content will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>ForkJoin</strong></h5>
+                    <hr>
+                    <div class="wrapper d-flex flex-wrap" id="forkJoinContainer">
+                        <!-- Content will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

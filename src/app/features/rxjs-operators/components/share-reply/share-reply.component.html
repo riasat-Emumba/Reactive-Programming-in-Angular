@@ -1,0 +1,49 @@
+<div class="container mt-4">
+    <!-- First Card: Photos with ID 1-10 -->
+    <div class="row">
+        <div class="col-md-4" *ngFor="let photo of first3Photos$ | async">
+            <h2 class="mb-4">{{photo.id}}</h2>
+            <div class="card mb-4 shadow-sm">
+                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{photo.title}}</h5>
+                    <p class="card-text">{{photo.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Card: Photos with ID 11-20 -->
+    <div class="row">
+        <div class="col-md-4" *ngFor="let photo of last3Photos$ | async">
+            <h2 class="mb-4">{{photo.id}}</h2>
+            <div class="card mb-4 shadow-sm">
+                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{photo.title}}</h5>
+                    <p class="card-text">{{photo.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Card: All Photos -->
+    <div class="row">
+        <div class="col-md-4" *ngFor="let photo of allPhotos$ | async">
+            <h2 class="mb-4">{{photo.id}}</h2>
+            <div class="card mb-4 shadow-sm">
+                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{photo.title}}</h5>
+                    <p class="card-text">{{photo.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-5 p-4 bg-light rounded">
+    <h3 class="text-primary">Conclusion</h3>
+    <p class="lead text-muted">
+        Initially, my API was being hit multiple times due to the repeated use of the observable. However, by using the <code>shareReplay</code> operator, the API is now hit only once. Subsequent data fetching does not involve any additional network requests, leading to improved performance and reduced load on the server.
+    </p>
+</div>

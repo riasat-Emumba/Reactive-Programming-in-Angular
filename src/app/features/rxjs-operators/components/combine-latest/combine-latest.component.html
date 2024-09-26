@@ -1,0 +1,58 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4"><strong>CombineLatest & with Latest From</strong></h2>
+    <div class="alert alert-info">
+        <p class="mb-1">CombineLatest is an RxJS operator that combines multiple observables to create an observable
+            whose values are calculated
+            from the latest values of each of its input observables. Whenever any input observable emits a value,
+            CombineLatest
+            emits the latest values from all input observables.</p>
+        <p>LatestFrom is another RxJS operator that combines the source observable with another observable to create an
+            observable that emits the latest value from the other observable whenever the source observable emits a
+            value.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Names</strong></h5>
+                    <hr>
+                    <select class="form-control mb-3" #name>
+                        <option *ngFor="let name of nameSource" value="{{name}}">{{name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Colors</strong></h5>
+                    <hr>
+                    <select class="form-control" #color>
+                        <option *ngFor="let color of colorSource" value="{{color}}">{{color}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Combine Latest</strong></h5>
+                    <hr>
+                    <div class="wrapper d-flex flex-wrap" id="combineLatestContainer">
+                        <!-- Content will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>with Latest From</strong></h5>
+                    <hr>
+                    <div class="wrapper d-flex flex-wrap" id="withLatestFromContainer">
+                        <!-- Content will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

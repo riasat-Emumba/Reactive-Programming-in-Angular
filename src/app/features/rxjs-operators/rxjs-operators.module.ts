@@ -30,6 +30,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
+import { ShareReplyComponent } from './components/share-reply/share-reply.component';
+import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
+import { ZipComponent } from './components/zip/zip.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.compon
     ConcatMapComponent,
     CompareMapsComponent,
     MapsInActionComponent,
-    ExhaustMapComponent
+    ExhaustMapComponent,
+    ShareReplyComponent,
+    CombineLatestComponent,
+    ZipComponent
   ],
   imports: [
     CommonModule,

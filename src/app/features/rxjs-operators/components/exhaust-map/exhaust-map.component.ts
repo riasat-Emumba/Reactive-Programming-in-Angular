@@ -8,13 +8,9 @@ import { concatMap, delay, exhaustMap, from, fromEvent, interval, of, switchMap,
 })
 export class ExhaustMapComponent implements OnInit, AfterViewInit {
   currentValue = 0;
-
-
   @ViewChild('incrementBtn') incrementBtn!: ElementRef;
 
-
   ngOnInit(): void {
-
     this.example(concatMap)();
   }
 
@@ -29,19 +25,14 @@ export class ExhaustMapComponent implements OnInit, AfterViewInit {
         console.log,
         () => { },
         () => console.log(`${operator.name} complete`)
-      )
-
+      );
   }
-
 
   onIncrement() {
     if (this.incrementBtn) {
       fromEvent(this.incrementBtn.nativeElement, 'click')
-
         .subscribe((data) => {
           console.log(data);
-
-
         });
     }
   }

@@ -35,6 +35,9 @@ export class RxjsDashboardComponent implements OnInit {
       { name: 'Compare Maps', link: '/rxjs-dashboard/compare-maps' },
       { name: 'DebounceTime', link: '/rxjs-dashboard/debounce-time' },
       { name: 'Maps Practical Examples', link: '/rxjs-dashboard/map-in-action' },
+      { name: 'Share-reply', link: '/rxjs-dashboard/share-reply' },
+      { name: 'Combine-latest', link: '/rxjs-dashboard/combine-latest' },
+      { name: 'Zip & ForkJoin', link: '/rxjs-dashboard/zip-fork-join' },
       // Add more operators as needed
     ];
   }
