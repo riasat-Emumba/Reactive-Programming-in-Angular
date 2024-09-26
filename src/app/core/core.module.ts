@@ -16,6 +16,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentComponent } from './components/content/content.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from '../shared/shared.module';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     MatInputModule, 
     MatFormFieldModule,
     MatIconModule,
+    MatMenuModule,
     ReactiveFormsModule,
   ],
   exports: [

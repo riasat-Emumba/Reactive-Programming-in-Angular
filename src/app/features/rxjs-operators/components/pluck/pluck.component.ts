@@ -25,7 +25,6 @@ export class PluckComponent implements OnInit {
     ).subscribe((value) =>{
       console.log(value);
     })
-
   }
 
 

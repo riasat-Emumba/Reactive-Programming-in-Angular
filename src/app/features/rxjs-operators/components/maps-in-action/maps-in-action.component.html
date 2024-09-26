@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Video Search</h5>
+                    <form [formGroup]="searchForm">
+                        <div class="mb-3">
+                            <label for="searchInput" class="form-label">Search</label>
+                            <input autocomplete="off" type="text" class="form-control" id="searchInput" [formControl] = "searchVideos" placeholder="Type to search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let video of filteredVideos">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <img [src]="video.thumbnail" alt="{{ video.title }}" class="img-thumbnail" style="width: 100px;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="mb-1">{{ video.title }}</h5>
+                            <!-- <p class="mb-1 text-truncate" style="max-width: 400px;">{{ video.description }}</p> -->
+                            <a [href]="video.url" target="_blank" class="btn btn-primary btn-sm">Watch Video</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

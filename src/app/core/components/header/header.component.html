@@ -1,16 +1,28 @@
-<mat-toolbar color="primary">
-  {{title}}
- <ng-content></ng-content>
+<mat-toolbar color="primary" >
+  <span class="title">{{title}}</span>
+  <span class="spacer"></span>
+  <ng-content></ng-content>
   <nav *ngIf="isLoggedIn" class="button-group">
-    <button mat-raised-button (click)="navigateToRxjsDashboard()" >RxJs Operators</button>
-    <button mat-raised-button (click)="navigateToPromiseDashboard()" >Promises</button>
-    <button mat-raised-button (click)="navigateToHome()" >Home</button>
-    <button mat-raised-button (click)="logOut()" >LogOut</button>
-    <!-- <nav>
-      <a mat-button (click)="navigateToRxjsDashboard()" >RxJs Operators</a>
-      <a mat-button (click)="navigateToPromiseDashboard()" >Promises</a>
-      <a mat-button (click)="navigateToHome()" >Home</a>
-      <a mat-button (click)="logOut()" >LogOut</a>
-    </nav> -->
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navigateToRxjsDashboard()">
+        <mat-icon>trending_up</mat-icon>
+        <span>RxJs Operators</span>
+      </button>
+      <button mat-menu-item (click)="navigateToPromiseDashboard()">
+        <mat-icon>hourglass_empty</mat-icon>
+        <span>Promises</span>
+      </button>
+      <button mat-menu-item (click)="navigateToHome()">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>LogOut</span>
+      </button>
+    </mat-menu>
   </nav>
 </mat-toolbar>

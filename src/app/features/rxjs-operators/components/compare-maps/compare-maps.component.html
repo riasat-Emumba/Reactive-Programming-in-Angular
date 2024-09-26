@@ -1,0 +1,124 @@
+<h3 class="mb-0"><strong>Comparison of Map Operators</strong></h3>
+<p>Map, MergeMap, and concatMap</p>
+
+
+<div class="row">
+    <!-- Example 01: Map -->
+    <!-- <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <strong>Example 01 | Map</strong>
+            </div>
+            <div class="card-body">
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                </p>
+                <hr>
+                <ul class="list-group list-group-flush" *ngFor="let video of videoListForMap">
+                    <li class="list-group-item">{{video}}</li>
+                </ul>
+                <hr>
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Result</strong>: <span class="text-primary">Map transforms each value emitted by the source observable.</span>
+                </p>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Example 02: MergeMap -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <strong>Example 02 | MergeMap</strong>
+            </div>
+            <div class="card-body">
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                </p>
+                <hr>
+                <ul class="list-group list-group-flush" *ngFor="let video of videoListForMergeMap">
+                    <li class="list-group-item">{{video}}</li>
+                </ul>
+                <hr>
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Result</strong>: <span class="text-danger">MergeMap does not preserve the order of observables.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Example 03: ConcatMap -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <strong>Example 03 | ConcatMap</strong>
+            </div>
+            <div class="card-body">
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                </p>
+                <hr>
+                <ul class="list-group list-group-flush" *ngFor="let video of videoListForConcatMap">
+                    <li class="list-group-item">{{video}}</li>
+                </ul>
+                <hr>
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Result</strong>: <span class="text-success">ConcatMap preserves the order of observables.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+       <!-- Example 04: SwitchMap -->
+       <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <strong>Example 04 | SwitchMap</strong>
+            </div>
+            <div class="card-body">
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                </p>
+                <hr>
+                <ul class="list-group list-group-flush" *ngFor="let video of videoListForSwitchMap">
+                    <li class="list-group-item">{{video}}</li>
+                </ul>
+                <hr>
+                <p class="bg-light py-2 px-3 border rounded">
+                    <strong>Result</strong>: <span class="text-dark">SwitchMap switches to a new observable on each emission, cancelling the previous one.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="col-md-12 mt-4">
+        <div class="card shadow-lg">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Conclusion</h4>
+            </div>
+            <div class="card-body">
+                <p>
+                    In summary, each map operator in RxJS has its unique behavior:
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Map</strong>: Transforms each value emitted by the source observable.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>MergeMap</strong>: Flattens the observables and does not preserve the order of emitted values.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>ConcatMap</strong>: Flattens the observables while preserving the order of emitted values.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>SwitchMap</strong>: Switches to a new observable on each emission, cancelling the previous one.
+                    </li>
+                </ul>
+                <p class="mt-3">
+                    Choose the appropriate operator based on the specific requirements of your data flow and the desired order of emissions.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

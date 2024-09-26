@@ -7,6 +7,8 @@ import { CoreModule } from './core/core.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MatSidenavModule,MatSidenavModule,
     CoreModule, HttpClientModule,
-    SharedModule,
+    SharedModule, MatIconModule,
+    MatMenuModule,
     BrowserAnimationsModule
   ],
   providers: [],

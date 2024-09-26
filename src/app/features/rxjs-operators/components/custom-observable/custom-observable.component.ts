@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { from, Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-custom-observable',
@@ -8,9 +8,10 @@ import { Observable, Observer } from 'rxjs';
 })
 export class CustomObservableComponent implements OnInit {
   private dataObservable$!: Observable<number>;
-  menuObservable$!: Observable<string[]>;
-  itemList: number[] = [];
-  menuItems: string[] = [];
+  public menuObservable$!: Observable<string[]>;
+  public itemList: number[] = [];
+  public menuItems: string[] = [];
+
   constructor() {
     this.initializeDataObservable();
   }
@@ -18,36 +19,7 @@ export class CustomObservableComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToDataObservable();
     this.setupMenuObservable();
-    // this.setupMenuObserver();
   }
-
-  private setupMenuObservable(): void {
-    this.menuObservable$ = new Observable<string[]>(subscriber => {
-      let menuList = ["Burger", "Pasta"]
-      subscriber.next(menuList);
-      subscriber.complete();
-    });
-  }
-
-  // private setupMenuObserver(): void {
-  //   const observer: Observer<string[]> = {
-  //     next: (menuItem) => {
-  //       console.log('Menu Item:', menuItem);
-  //       this.menuItems = menuItem; 
-  //     },
-  //     error: (error) => {
-  //       console.error('Error in menu observable:', error);
-  //     },
-  //     complete: () => {
-  //       console.log("Menu Observable completed");
-  //     }
-  //   };
-  //   this.subscribeToMenuObservable(observer)
-  // }
-
-  // private subscribeToMenuObservable(observer: Observer<string[]>): void {
-  //   this.menuObservable$.subscribe(observer);
-  // }
 
   private initializeDataObservable(): void {
     this.dataObservable$ = new Observable<number>(subscriber => {
@@ -73,4 +45,27 @@ export class CustomObservableComponent implements OnInit {
       }
     });
   }
+
+  private setupMenuObservable(): void {
+    this.menuObservable$ = new Observable<string[]>(subscriber => {
+      const menuList = ['Burger', 'Pasta'];
+      subscriber.next(menuList);
+      subscriber.complete();
+    });
+
+    // Optional: Subscribe to the menu observable directly
+    this.menuObservable$.subscribe({
+      next: (menuItems: string[]) => {
+        this.menuItems = menuItems;
+        console.log('Menu Items:', this.menuItems);
+      },
+      complete: () => {
+        console.log('Menu Observable completed');
+      },
+      error: (error) => {
+        console.error('Error in menu observable:', error);
+      }
+    });
+  }
+  
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { ObservabledataService } from '../../services/observabledata.service';
 
 @Component({
@@ -9,31 +9,34 @@ import { ObservabledataService } from '../../services/observabledata.service';
 })
 export class IntervalComponent implements OnInit, OnDestroy {
 
-  constructor(private observableDataService: ObservabledataService){}
+  private broadcastSubscription!: Subscription;
+  videoList: string[] = [];
+  publishedVideoCount: number = 0;
 
-  private broadCastSubscription!: Subscription;
-  broadCastedVideoList:string[] = [];
-  totalPublishedVideos: number = 0 ;
+  constructor(private observableDataService: ObservabledataService) {}
+
   ngOnInit(): void {
-    this.startVideoBroadCast()
+    this.startBroadcast();
   }
 
-  startVideoBroadCast() {
-    const broadCastVideos$ = interval(2000);
-    this.broadCastSubscription = broadCastVideos$.subscribe((data) => {
-      let msgFromObservable = 'Video ' + ++data;
-      this.totalPublishedVideos = data;
-      this.observableDataService.addData(msgFromObservable, this.broadCastedVideoList)
-      // Used to stop emitting more data after below condition is true
-      if (data >= 5) {
-        this.broadCastSubscription.unsubscribe();
+  private startBroadcast(): void {
+    const broadcastInterval$ = interval(2000);
+    this.broadcastSubscription = broadcastInterval$.subscribe((count) => {
+      const videoMessage = `Video ${count + 1}`;
+      this.publishedVideoCount = count + 1;
+      this.observableDataService.addData(videoMessage, this.videoList);
+
+      if (this.publishedVideoCount >= 5) {
+        this.broadcastSubscription.unsubscribe();
       }
     });
   }
 
   ngOnDestroy(): void {
-    if (this.broadCastSubscription) {
-      this.broadCastSubscription.unsubscribe();
+    if (this.broadcastSubscription) {
+      this.broadcastSubscription.unsubscribe();
     }
   }
+
+
 }

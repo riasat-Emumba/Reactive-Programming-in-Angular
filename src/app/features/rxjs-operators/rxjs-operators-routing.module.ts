@@ -15,6 +15,11 @@ import { RetryComponent } from './components/retry/retry.component';
 import { DebounceTimeComponent } from './components/debounce-time/debounce-time.component';
 import { ConcatComponent } from './components/concat/concat.component';
 import { MergeComponent } from './components/merge/merge.component';
+import { MergeMapComponent } from './components/merge-map/merge-map.component';
+import { ConcatMapComponent } from './components/concat-map/concat-map.component';
+import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
+import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
+import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
 
 const routes: Routes = [
   { path: '', component: RxjsDashboardComponent },
@@ -32,6 +37,11 @@ const routes: Routes = [
   { path: 'debounce-time', component: DebounceTimeComponent },
   { path: 'concat', component: ConcatComponent },
   { path: 'merge', component: MergeComponent },
+  { path: 'merge-map', component: MergeMapComponent },
+  { path: 'concat-map', component: ConcatMapComponent },
+  { path: 'compare-maps', component: CompareMapsComponent },
+  { path: 'map-in-action', component: MapsInActionComponent },
+  { path: 'exhaust-map', component: ExhaustMapComponent },
 
 
 ];

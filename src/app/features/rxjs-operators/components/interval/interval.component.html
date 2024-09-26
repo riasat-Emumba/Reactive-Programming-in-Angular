@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">Uploading Videos</div>
             <div class="card-body">
-                <ul *ngFor="let video of broadCastedVideoList">
+                <ul *ngFor="let video of videoList">
                     <li>{{video}}</li>
                 </ul>
             </div>
@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-header">Total Videos</div>
             <div class="card-body">
-                    <p>{{totalPublishedVideos}}</p>
+                    <p>{{publishedVideoCount}}</p>
             </div>
         </div>
     </div>

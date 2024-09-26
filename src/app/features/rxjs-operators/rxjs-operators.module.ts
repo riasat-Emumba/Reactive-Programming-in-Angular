@@ -21,6 +21,16 @@ import { RetryComponent } from './components/retry/retry.component';
 import { DebounceTimeComponent } from './components/debounce-time/debounce-time.component';
 import { ConcatComponent } from './components/concat/concat.component';
 import { MergeComponent } from './components/merge/merge.component';
+import { MergeMapComponent } from './components/merge-map/merge-map.component';
+import { ConcatMapComponent } from './components/concat-map/concat-map.component';
+import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
+import { MatCardModule } from '@angular/material/card';
+import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatListModule} from '@angular/material/list';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
+
 @NgModule({
   declarations: [
     RxjsDashboardComponent,
@@ -38,11 +48,20 @@ import { MergeComponent } from './components/merge/merge.component';
     RetryComponent,
     DebounceTimeComponent,
     ConcatComponent,
-    MergeComponent
+    MergeComponent,
+    MergeMapComponent,
+    ConcatMapComponent,
+    CompareMapsComponent,
+    MapsInActionComponent,
+    ExhaustMapComponent
   ],
   imports: [
     CommonModule,
     MatButtonModule, 
+    MatFormFieldModule, 
+    ReactiveFormsModule,
+    MatListModule,
+    MatCardModule,
     MatGridListModule,
     RxjsOperatorsRoutingModule
   ]

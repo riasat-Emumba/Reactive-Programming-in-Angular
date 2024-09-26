@@ -8,58 +8,39 @@ import { concat, interval, map, merge, Observable, startWith, take } from 'rxjs'
 })
 export class ConcatComponent implements OnInit {
 
-  ngOnInit(): void {
-    this.getDataForTech();
-    this.getDataForComedy();
-    this.getDataForNews();
-    // this.getFinalObservableUsingConcat();
-    this.getFinalObservableUsingMerge();
-  }
-
-
-  getFinalObservableUsingMerge() {
-    const techObs = this.getDataForTech();
-    const comedyObs = this.getDataForComedy();
-    const newsObs = this.getDataForNews();
-
-    const finalObservable = merge(techObs, comedyObs, newsObs);
-    finalObservable.subscribe(data => {
-      console.log(data);
-
-    })
-  }
-
-  getFinalObservableUsingConcat() {
-    const techObs = this.getDataForTech();
-    const comedyObs = this.getDataForComedy();
-    const newsObs = this.getDataForNews();
-
-    const finalObservable = concat(techObs, comedyObs, newsObs);
-    finalObservable.subscribe(data => {
-      console.log(data);
-
-    })
-  }
-
-  getDataForTech() {
-    return  interval(1000).pipe(
-      map(count => 'TechVideo #' + (count + 1)),
-      take(5)
-    )
-
-  }
-
-  getDataForComedy() {
-    return interval(1000).pipe(
-      map(count => 'ComedyVideo #' + (count + 1)),
-      take(3)
-    );
-  }
-
-  getDataForNews() {
-    return  interval(1000).pipe(
-      map(count => 'NewsVideo #' + (count + 1)),
-      take(4)
-    )
-  }
+    ngOnInit(): void {
+      this.concatVideoStreams();
+    }
+  
+    private concatVideoStreams(): void {
+      const techStream = this.createTechStream();
+      const comedyStream = this.createComedyStream();
+      const newsStream = this.createNewsStream();
+  
+      const finalStream = concat(techStream, comedyStream, newsStream);
+      finalStream.subscribe(video => {
+        console.log(video);
+      });
+    }
+  
+    private createTechStream(): Observable<string> {
+      return this.createVideoStream('TechVideo', 5);
+    }
+  
+    private createComedyStream(): Observable<string> {
+      return this.createVideoStream('ComedyVideo', 3);
+    }
+  
+    private createNewsStream(): Observable<string> {
+      return this.createVideoStream('NewsVideo', 4);
+    }
+  
+    private createVideoStream(prefix: string, count: number): Observable<string> {
+      return interval(1000).pipe(
+        map(index => `${prefix} #${index + 1}`),
+        take(count)
+      );
+    }
+  
+  
 }

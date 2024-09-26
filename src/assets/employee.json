@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "AliAdmin", "gender" : "Male" },
+    { "id": 2, "name": "AyeshAdmin", "gender" : "Female" },
+    { "id": 3, "name": "AwaisAdmin", "gender" : "Male" },
+    { "id": 4, "name": "ZohaibAdmin", "gender" : "Male" },
+    { "id": 5, "name": "NaqashAdmin", "gender" : "Male" }
+  ]

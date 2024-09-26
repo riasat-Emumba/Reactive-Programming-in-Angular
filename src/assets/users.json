@@ -1,0 +1,9 @@
+[
+    { "id": 1, "firstname": "Ali", "lastname": "Khan", "membershiplevel": "Gold" },
+    { "id": 2, "firstname": "Ayesha", "lastname": "Ali", "membershiplevel": "Silver" },
+    { "id": 3, "firstname": "Awais", "lastname": "Raza", "membershiplevel": "Gold" },
+    { "id": 4, "firstname": "Zohaib", "lastname": "Naseer", "membershiplevel": "Platinum" },
+    { "id": 5, "firstname": "Naqash", "lastname": "Ahmed", "membershiplevel": "Gold" },
+    { "id": 6, "firstname": "Zarnab", "lastname": "Fatima", "membershiplevel": "Silver" }
+  ]
+  

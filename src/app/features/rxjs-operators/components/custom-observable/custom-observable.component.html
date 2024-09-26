@@ -1,31 +1,34 @@
-<h3 class="mb-0"><b>Custom Observables</b></h3>
-<p>There are many ways we can create custom variables such as create, new keword, of, from, and so on</p>
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                Stock
-            </div>
-            <div class="card-body">
-                <ul *ngFor="let itemCount of itemList">
-                    <li> {{itemCount}} </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                Menu List
-            </div>
-            <div class="card-body">
-                    <ul *ngIf="menuObservable$ | async  as menuObservable">
-                        <li *ngFor="let menu of menuObservable"> {{menu}} </li>
+<section class="container mt-4">
+    <h3 class="mb-3"><strong>Custom Observables</strong></h3>
+    <p>There are many ways we can create custom observables, such as `create`, `new`, `of`, `from`, and more.</p>
+
+    <div class="row"> 
+        <!-- Stock Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Stock</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li *ngFor="let itemCount of itemList">{{ itemCount }}</li>
                     </ul>
-                    <!-- <ul *ngIf="menuItems.length > 0">
-                        <li *ngFor="let menu of menuItems">{{ menu }}</li>
-                      </ul> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu List Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Menu List</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled" *ngIf="menuObservable$ | async as menuObservable">
+                        <li *ngFor="let menu of menuObservable">{{ menu }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>

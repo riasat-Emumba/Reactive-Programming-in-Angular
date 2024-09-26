@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, from, toArray } from 'rxjs';
+import { filter, from, map, mergeMap, of, tap, toArray } from 'rxjs';
+import { UserService } from '../../services/user.service';
+import { ISuperUser } from '../../models/super-userinterface';
 
 @Component({
   selector: 'app-filter',
@@ -7,55 +9,53 @@ import { filter, from, toArray } from 'rxjs';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  userDataByNameLength: any;
-  userDataByGender: any;
-  userDataByNthItem: any;
-  dataArray:any [] = [
-    { id: 1, name: "Ali", gender : "Male" },
-    { id: 2, name: "Ayesha", gender : "Female" },
-    { id: 3, name: "Awais", gender : "Male" },
-    { id: 4, name: "Zohaib", gender : "Male" },
-    { id: 5, name: "Naqash", gender : "Male" },
-    { id: 6, name: "Zarnab", gender : "Female" },
-  ]
+  userDataByNameLength!: ISuperUser[];
+  userDataByGender!: ISuperUser[];
+  userDataByNthItem!: ISuperUser[];
+
+  constructor(private userService: UserService) { }
   ngOnInit(): void {
     this.filterById();
+    // this.filterById1();
     this.filterByGender();
     this.filterByNthItem();
   }
 
+  // filterById1() {
+  //   this.userService.getSuperUsers().pipe(
+  //   map(users => from(users)), 
+  //   tap(data => console.log(data))
+  // ).subscribe((data) => {
+  //     console.log(data);
+  //     // this.userDataByNameLength = data;
+  //   });
+  // }
 
-  
-  filterByNthItem(){
-    const source = from(this.dataArray);
-
-    source.pipe(
-      filter((user) => user.id >=4 ),
-      toArray()
+  filterById() {
+    this.userService.getSuperUsers().pipe(
+      map(users => users.filter(user => user.id > 2)),
+      tap(data => console.log(data)),
     ).subscribe((data) => {
-        this.userDataByNthItem = data;
-    })
-  }
-  
-  filterByGender(){
-    const source = from(this.dataArray);
-
-    source.pipe(
-      filter((user) => user.gender  === "Male" ),
-      toArray()
-    ).subscribe((data) => {
-        this.userDataByGender = data;
-    })
+      console.log(data);
+      this.userDataByNameLength = data;
+    });
   }
 
-  filterById(){
-    const source = from(this.dataArray);
-
-    source.pipe(
-      filter((user) => user.name.length  > 5 ),
-      toArray()
+  filterByGender() {
+    this.userService.getSuperUsers().pipe(
+      map(users => users.filter(user => user.gender === "Male")),
     ).subscribe((data) => {
-        this.userDataByNameLength = data;
+      this.userDataByGender = data;
     })
   }
+
+  filterByNthItem() {
+    this.userService.getSuperUsers().pipe(
+      map(users => users.filter(user => user.id >= 4)),
+    ).subscribe((data) => {
+      this.userDataByNthItem = data;
+    }
+    )
+  }
+
 }

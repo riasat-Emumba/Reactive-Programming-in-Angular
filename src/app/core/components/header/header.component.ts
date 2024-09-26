@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   title : string  = ''
   isLoggedIn: boolean = false;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router,private location: Location) {}
 
   ngOnInit() {
     this.userLoggedIn()
@@ -18,7 +19,6 @@ export class HeaderComponent {
 
   userLoggedIn() {
     this.authService.loggedIn$.subscribe(loggedIn => {
-      console.log(loggedIn);
       this.isLoggedIn = loggedIn;
       this.title = !loggedIn ? 'Welcome' : 'Async Architecture'
     });
@@ -40,5 +40,9 @@ export class HeaderComponent {
   navigateToRxjsDashboard() {
     this.router.navigate(['rxjs-dashboard']);
   }
+
+  // goBack() {
+  //   this.location.back();
+  // }
 
 }

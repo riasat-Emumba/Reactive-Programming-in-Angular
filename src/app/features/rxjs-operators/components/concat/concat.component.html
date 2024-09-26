@@ -1,41 +1,49 @@
-<h3 class="mb-1"><b>Concat operator</b></h3>
-<p>It adds two streams but once first is finished emiitting data then it will add second with first and so on.</p>
-<div class="row">
-    <div class="col-md-4">
-        <strong>Source -01 | Tech Channle(5)</strong>
-        <hr>
-        <p class="bg-light py-2 px-3 border rounded">
-            <strong>Tech Video List</strong> : 1,2,3,4,5
-        </p>
-        <br>
-        <!-- <p>Message  <strong class="text-success"> {{msg1}}</strong></p> -->
-    </div>
-    <div class="col-md-4">
-        <strong>Source -02 | Comedy Channle(3)</strong>
-        <hr>
-        <p class="bg-light py-2 px-3 border rounded">
-            <strong>Comedy Video List</strong> : 1,2,3
-        </p>
-        <br>
-        <!-- <p>Message  <strong class="text-success"> {{comedyObservable$}}</strong></p> -->
-    </div>
-    <div class="col-md-4">
-        <strong>Source -03 | News Channle(4)</strong>
-        <hr>
-        <p class="bg-light py-2 px-3 border rounded">
-            <strong>News Video List</strong> : 1,2,3,4
-        </p>
-        <br>
-        <!-- <p>Message  <strong class="text-success"> {{msg1}}</strong></p> -->
+<section class="container mt-4">
+    <h3 class="mb-3"><strong>Concat Operator</strong></h3>
+    <p>
+        The concat operator adds multiple streams sequentially. Once the first stream finishes emitting data, the second stream begins.
+    </p>
+
+    <div class="row">
+        <article class="col-md-4 mb-4">
+            <header>
+                <h4>Tech Channel (5)</h4>
+            </header>
+            <hr>
+            <div class="bg-light p-3 border rounded">
+                <strong>Video List:</strong> 1, 2, 3, 4, 5
+            </div>
+        </article>
+
+        <article class="col-md-4 mb-4">
+            <header>
+                <h4>Comedy Channel (3)</h4>
+            </header>
+            <hr>
+            <div class="bg-light p-3 border rounded">
+                <strong>Video List:</strong> 1, 2, 3
+            </div>
+        </article>
+
+        <article class="col-md-4 mb-4">
+            <header>
+                <h4>News Channel (4)</h4>
+            </header>
+            <hr>
+            <div class="bg-light p-3 border rounded">
+                <strong>Video List:</strong> 1, 2, 3, 4
+            </div>
+        </article>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-4">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header"> Your Channel (Subscriber)</div>
+                <div class="card-header">Your Channel (Subscribers)</div>
                 <div class="card-body">
+                    <!-- Content for subscribers can be added here -->
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

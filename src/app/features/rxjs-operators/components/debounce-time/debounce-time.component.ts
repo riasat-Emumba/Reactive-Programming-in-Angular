@@ -1,40 +1,52 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-debounce-time',
   templateUrl: './debounce-time.component.html',
   styleUrls: ['./debounce-time.component.scss']
 })
-export class DebounceTimeComponent implements OnInit, AfterViewInit {
-@ViewChild("searchInput") searchInput! : ElementRef
+export class DebounceTimeComponent implements AfterViewInit {
+  @ViewChild('searchInput1') searchInput1!: ElementRef;
+  @ViewChild('searchInput2') searchInput2!: ElementRef;
 
-ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.setupSearchInput1();
+    this.setupSearchInput2();
+  }
 
-}
+  private setupSearchInput1(): void {
+    const searchTerm$: Observable<Event> = fromEvent(this.searchInput1.nativeElement, 'input');
 
+    searchTerm$.pipe(
+      map((event: Event) => (event.target as HTMLInputElement).value),
+      debounceTime(700) 
+    ).subscribe({
+      next: (value) => {
+        console.log('Input 1:', value); 
+      },
+      error: (err) => {
+        console.error('Error occurred in Input 1:', err);
+      },
+    });
+  }
 
-ngAfterViewInit(): void {
-  this.searchData()
-}
+  private setupSearchInput2(): void {
+    const searchTerm$: Observable<Event> = fromEvent(this.searchInput2.nativeElement, 'input');
 
-searchData(){
-  const searchTerm$ = fromEvent(this.searchInput.nativeElement, "input");
-  console.log(searchTerm$);
-  searchTerm$.pipe(
-    map( (event:any) => event.target.value),
-    debounceTime(500), distinctUntilChanged()
-  ).
-  subscribe({
-    next: ((value) =>{
-      console.log(value);
-      
-    }),error:(err =>{
-      console.log(err);
-      
-    })
-  })
-}
-
+    searchTerm$
+      .pipe(
+        map((event: Event) => (event.target as HTMLInputElement).value),
+        debounceTime(800),
+        distinctUntilChanged()
+      ).subscribe({
+        next: (value) => {
+          console.log('Input 2:', value);
+        },
+        error: (err) => {
+          console.error('Error occurred in Input 2:', err);
+        },
+      });
+  }
 
 }
