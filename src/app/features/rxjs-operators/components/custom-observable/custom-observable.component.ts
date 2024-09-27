@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable, Observer } from 'rxjs';
+import { from, Observable, Observer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-custom-observable',
@@ -7,104 +7,107 @@ import { from, Observable, Observer } from 'rxjs';
   styleUrls: ['./custom-observable.component.scss']
 })
 export class CustomObservableComponent implements OnInit {
+
   private dataObservable$!: Observable<number>;
   public menuObservable$!: Observable<string[]>;
   public itemList: number[] = [];
   public menuItems: string[] = [];
-
+  private subscriptions: Subscription = new Subscription();
+  
   constructor() {
-    this.initializeDataObservable();
+    this.createDataObservable();
   }
 
   ngOnInit(): void {
-    this.subscribeToDataObservable();
-    this.setupMenuObservable();
-    this.coldObservableIsUnicastExample();
-    this.hotObservableIsMulticastExample();
+    this.subscriptions.add(this.subscribeToData());
+    this.subscriptions.add(this.createMenuObservable());
+    this.generateColdObservable();
+    this.generateHotObservable();
   }
 
-  coldObservableIsUnicastExample(){
-    // Cold Observable because data is generated inside the observable. We can make this hot by moving data generation outside the observable.
-    const observable = Observable.create((observer:any) => {
-      observer.next(Math.random());
-  });
-  
-  // subscription 1
-  observable.subscribe((data:any) => {
-    console.log(data); 
-  });
-  
-  // subscription 2
-  observable.subscribe((data:any) => {
-     console.log(data); 
-  });
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
-  hotObservableIsMulticastExample(){
-    const randomNumber = Math.random();
-    // Hot Observable because data is generated outside the observable. And each subscriber gets the same data. Which means hot observable is multicast.
-    const observable = Observable.create((observer:any) => {
-      observer.next(randomNumber);
-  });
+  generateColdObservable() {
+    const cold$ = new Observable<number>((observer) => {
+      observer.next(Math.random()); // Unique value for each subscriber
+      observer.complete();
+    });
   
-  // subscription 1
-  observable.subscribe((data:any) => {
-    console.log(data); 
-  });
+    // Subscription 1
+    cold$.subscribe((value) => {
+      console.log('Cold Observable - Subscription 1:', value); 
+    });
   
-  // subscription 2
-  observable.subscribe((data:any) => {
-     console.log(data);   
-  });
-  }
-
-
-
-  private initializeDataObservable(): void {
-    this.dataObservable$ = new Observable<number>(subscriber => {
-      // Emit values from 0 to 100 in increments of 10
-      for (let i = 0; i <= 100; i += 10) {
-        subscriber.next(i);
-      }
-      subscriber.complete();
+    // Subscription 2
+    cold$.subscribe((value) => {
+      console.log('Cold Observable - Subscription 2:', value); 
     });
   }
-
-  private subscribeToDataObservable(): void {
+  
+  generateHotObservable() {
+    const sharedValue = Math.random(); // Shared value across all subscribers
+    const hot$ = new Observable<number>((observer) => {
+      observer.next(sharedValue); // Same value for all subscribers
+      observer.complete();
+    });
+  
+    // Subscription 1
+    hot$.subscribe((value) => {
+      console.log('Hot Observable - Subscription 1:', value); 
+    });
+  
+    // Subscription 2
+    hot$.subscribe((value) => {
+      console.log('Hot Observable - Subscription 2:', value);   
+    });
+  }
+  
+  private createDataObservable(): void {
+    this.dataObservable$ = new Observable<number>(observer => {
+      for (let i = 0; i <= 100; i += 10) {
+        observer.next(i);
+      }
+      observer.complete();
+    });
+  }
+  
+  private subscribeToData(): void {
     this.dataObservable$.subscribe({
-      next: (value: number) => {
+      next: (value) => {
         this.itemList.push(value);
-        console.log('Data value:', value);
+        console.log('Emitted value:', value);
       },
       complete: () => {
-        console.log('Data Observable completed');
+        console.log('Data emission completed');
       },
-      error: (err: any) => {
-        console.error('Error occurred in data Observable:', err);
+      error: (error) => {
+        console.error('Error in data emission:', error);
       }
     });
   }
-
-  private setupMenuObservable(): void {
-    this.menuObservable$ = new Observable<string[]>(subscriber => {
+  
+  private createMenuObservable(): void {
+    this.menuObservable$ = new Observable<string[]>(observer => {
       const menuList = ['Burger', 'Pasta'];
-      subscriber.next(menuList);
-      subscriber.complete();
+      observer.next(menuList);
+      observer.complete();
     });
-
-    // Optional: Subscribe to the menu observable directly
+  
     this.menuObservable$.subscribe({
-      next: (menuItems: string[]) => {
-        this.menuItems = menuItems;
+      next: (items) => {
+        this.menuItems = items;
         console.log('Menu Items:', this.menuItems);
       },
       complete: () => {
-        console.log('Menu Observable completed');
+        console.log('Menu emission completed');
       },
       error: (error) => {
-        console.error('Error in menu observable:', error);
+        console.error('Error in menu emission:', error);
       }
     });
   }
+  
   
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Observer } from 'rxjs';
-import { ObservabledataService } from '../../services/observabledata.service';
-import { IWindowSize } from '../../models/windowsizeinterface';
+import { IWindowSize } from '../../models/iwindowsize';
+import { MessageStorageService } from '../../services/message-storage.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class FromeventComponent implements OnInit, AfterViewInit {
 
   videosList: string[] = [];
 
-  constructor(private observableDataService: ObservabledataService) { }
+  constructor(private messageStorageService: MessageStorageService) {}
   ngOnInit(): void {
   }
 
@@ -44,7 +44,7 @@ export class FromeventComponent implements OnInit, AfterViewInit {
     this.addBtn$ = fromEvent(this.addBtn.nativeElement, 'click');
     this.addBtn$.subscribe(() => {
       let videoCounter = "Video : " + count++;
-      this.observableDataService.addData(videoCounter, this.videosList)
+      this.messageStorageService.addData(videoCounter, this.videosList)
     });
   }
 

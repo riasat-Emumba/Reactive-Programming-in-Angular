@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { from, map, mergeMap, concatMap, Observable, delay, of, switchAll, switchMap } from 'rxjs';
-import { USER, SUPER_USER } from 'src/app/core/constants/constants';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-switchmap',

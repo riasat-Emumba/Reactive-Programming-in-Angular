@@ -7,13 +7,14 @@ import { catchError, combineLatest, fromEvent, map, Observable, pluck, withLates
   styleUrls: ['./combine-latest.component.scss']
 })
 export class CombineLatestComponent implements OnInit, AfterViewInit {
+
   nameSource = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];
   colorSource = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
 
-  @ViewChild('name') name!: ElementRef <HTMLSelectElement>;
-  @ViewChild('color') color!: ElementRef <HTMLSelectElement>;
+  @ViewChild('name') name!: ElementRef<HTMLSelectElement>;
+  @ViewChild('color') color!: ElementRef<HTMLSelectElement>;
 
-  constructor(){}
+  constructor() { }
 
   ngOnInit(): void { }
 
@@ -44,20 +45,19 @@ export class CombineLatestComponent implements OnInit, AfterViewInit {
   }
 
   withLatestFromOperator(): void {
-      this.nameEvent().pipe(
-        withLatestFrom(this.colorEvent())
-      ).subscribe(([name,color]) => {
-        console.log(name, color);
-        this.createBox(name, color, 'withLatestFromContainer');
-      })
+    this.nameEvent().pipe(
+      withLatestFrom(this.colorEvent())
+    ).subscribe(([name, color]) => {
+      console.log(name, color);
+      this.createBox(name, color, 'withLatestFromContainer');
+    })
   }
-  
+
   combineLatestOperator(): void {
     combineLatest([this.nameEvent(), this.colorEvent()]).subscribe({
       next: ([name, color]) => {
         console.log(name, color);
         this.createBox(name, color, 'combineLatestContainer');
-        // this.createBox(name, color, 'withLatestFromContainer');
       },
       error: (error) => {
         console.error('Error in combineLatestOperator:', error);

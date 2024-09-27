@@ -33,6 +33,8 @@ import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.compon
 import { ShareReplyComponent } from './components/share-reply/share-reply.component';
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
 import { ZipComponent } from './components/zip/zip.component';
+import { CatchErrorComponent } from './components/catch-error/catch-error.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -59,16 +61,13 @@ import { ZipComponent } from './components/zip/zip.component';
     ExhaustMapComponent,
     ShareReplyComponent,
     CombineLatestComponent,
-    ZipComponent
+    ZipComponent,
+    CatchErrorComponent
   ],
   imports: [
     CommonModule,
-    MatButtonModule, 
-    MatFormFieldModule, 
     ReactiveFormsModule,
     MatListModule,
-    MatCardModule,
-    MatGridListModule,
     RxjsOperatorsRoutingModule
   ]
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { delay, from, map, mergeAll, mergeMap, Observable } from 'rxjs';
-import { UserService } from '../../services/user.service';
-import { SUPER_USER, USER } from 'src/app/core/constants/constants';
+import { UserRole } from 'src/app/core/constants/constants';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-merge-map',
@@ -13,7 +13,7 @@ export class MergeMapComponent implements OnInit {
   userListForMapAndMergeAll: any[] = [];
   userListForMergeMap: any[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private apiService: ApiService) {}
   
   ngOnInit(): void {
     // this.example1UsingMap();
@@ -70,10 +70,10 @@ export class MergeMapComponent implements OnInit {
   }
 
   getUserByUserType(userType: string): Observable<any> {
-    if (userType == USER) {
-      return this.userService.getUsers().pipe(delay(5000));
-    } else if (userType === SUPER_USER) {
-      return this.userService.getSuperUsers();
+    if (userType == UserRole.USER) {
+      return this.apiService.getUsers().pipe(delay(5000));
+    } else if (userType === UserRole.SUPER_USER) {
+      return this.apiService.getSuperUsers();
     }
     return new Observable();
   }

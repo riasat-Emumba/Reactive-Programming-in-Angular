@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" >
-  <span class="title">{{title}}</span>
+  <span class="title">{{isLoggedIn ? projectName : welcomeMsg }}</span>
   <span class="spacer"></span>
   <ng-content></ng-content>
   <nav *ngIf="isLoggedIn" class="button-group">
@@ -22,6 +22,10 @@
       <button mat-menu-item (click)="logOut()">
         <mat-icon>exit_to_app</mat-icon>
         <span>LogOut</span>
+      </button>
+      <button mat-menu-item (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Go Back</span>
       </button>
     </mat-menu>
   </nav>

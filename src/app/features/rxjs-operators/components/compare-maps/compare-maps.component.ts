@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { UserService } from '../../services/user.service';
 import { from, map, concatMap, delay, mergeMap, of, switchMap } from 'rxjs';
-import { USER, SUPER_USER } from 'src/app/core/constants/constants';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-compare-maps',
@@ -11,143 +10,100 @@ import { USER, SUPER_USER } from 'src/app/core/constants/constants';
 })
 export class CompareMapsComponent {
 
-  videoListForMap: any[] = [];
-  videoListForMergeMap: any[] = [];
-  videoListForConcatMap: any[] = [];
-  videoListForSwitchMap: any[] = [];
+  videoListForMap: string[] = [];
+  videoListForMergeMap: string[] = [];
+  videoListForConcatMap: string[] = [];
+  videoListForSwitchMap: string[] = [];
+  private channelSource: string[] = ['Tech', 'Comedy', 'News'];
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     // Uncomment the method you want to test
     // this.example1UsingMap();
-    this.example2UsingMergeMap();
-    this.example3UsingConcatMap();
-    this.example4UsingSwitchMap();
+    this.executeMergeMap();
+    this.executeConcatMap();
+    this.executeSwitchMap();
+
   }
 
   // Example using map operator
-  // By using map we can get the dta but for that we need to subscribe twice
+  // By using map we can get the data but for that we need to subscribe twice
   // example1UsingMap(): void {
   //   const source = ['Tech', 'Comedy', 'News'];
   //   from(source)
   //     .pipe(
-  //       map(channelGenre => this.getDataByChannelName(channelGenre))
+  //       map(channelGenre => this.getChannelData(channelGenre))
   //     ).subscribe(data =>{
   //       // console.log(data);
-  //       this.videoListForMap.push(data);
+  //       // this.videoListForMap.push(data);
   //     }) 
   // }
 
+  // Centralized method to get data based on channel genre
+
+  getChannelData(channel: string): Observable<string> {
+    switch (channel) {
+      case 'Tech':
+        return this.apiService.getTechData(channel);
+      case 'News':
+        return this.apiService.getNewsData(channel);
+      case 'Comedy':
+        return this.apiService.getComedyData(channel);
+      default:
+        return of('Unknown Genre').pipe(delay(1000));
+    }
+  }
+
   // Example using mergeMap operator
-  example2UsingMergeMap(): void {
-    const source = ['Tech', 'Comedy', 'News'];
-    from(source)
+  executeMergeMap(): void {
+    from(this.channelSource)
       .pipe(
-        mergeMap(channelGenre => {
-          if(channelGenre === 'Tech') {
-            return this.getTechData(channelGenre);
-          } else if(channelGenre === 'News') {
-            return this.getNewsData(channelGenre);
-          } else {
-            return this.getComedyData(channelGenre);
-          }
-        })
+        mergeMap(channel => this.getChannelData(channel))
       )
-      .subscribe(data => {
-        console.log("MergeMap: ", data);
-        this.videoListForMergeMap.push(data);
+      .subscribe({
+        next: data => {
+          console.log("MergeMap: ", data);
+          this.videoListForMergeMap.push(data);
+        },
+        error: err => console.error('MergeMap Error:', err)
       });
   }
 
   // Example using concatMap operator
-  example3UsingConcatMap(): void {
-    const source = ['Tech', 'Comedy', 'News'];
-    from(source)
+  executeConcatMap(): void {
+    from(this.channelSource)
       .pipe(
-        concatMap(channelGenre => {
-          if(channelGenre === 'Tech') {
-            return this.getTechData(channelGenre);
-          } else if(channelGenre === 'News') {
-            return this.getNewsData(channelGenre);
-          } else {
-            return this.getComedyData(channelGenre);
-          }
-        })
+        concatMap(channel => this.getChannelData(channel))
       )
-      .subscribe((data) => {
-        console.log("concatMap: ", data);
-        this.videoListForConcatMap.push(data);
+      .subscribe({
+        next: data => {
+          console.log("ConcatMap: ", data);
+          this.videoListForConcatMap.push(data);
+        },
+        error: err => console.error('ConcatMap Error:', err)
       });
   }
 
-    example4UsingSwitchMap(): void {
-    const source = ['Tech', 'Comedy', 'News'];
-    from(source)
+  // Example using switchMap operator
+  executeSwitchMap(): void {
+    from(this.channelSource)
       .pipe(
-        switchMap(channelGenre => {
-          if (channelGenre === 'Tech') {
-            return this.getTechData(channelGenre);
-          } else if (channelGenre === 'News') {
-            return this.getNewsData(channelGenre);
-          } else {
-            return this.getComedyData(channelGenre);
-          }
-        })
+        switchMap(channel => this.getChannelData(channel))
       )
-      .subscribe((data) => {
-        console.log("switchMap: ", data);
-        this.videoListForSwitchMap.push(data);
+      .subscribe({
+        next: data => {
+          console.log("SwitchMap: ", data);
+          this.videoListForSwitchMap.push(data);
+        },
+        error: err => console.error('SwitchMap Error:', err)
       });
   }
 
 
-  // example4UsingSwitchMap(): void {
-  //   const source = ['Tech', 'Comedy', 'News'];
-  //   from(source)
-  //     .pipe(
-  //       switchMap(channelGenre => {
-  //         if (channelGenre === 'Tech') {
-  //           return this.getTechData(channelGenre);
-  //         } else if (channelGenre === 'News') {
-  //           return this.getNewsData(channelGenre);
-  //         } else {
-  //           return this.getComedyData(channelGenre);
-  //         }
-  //       })
-  //     )
-  //     .subscribe((data) => {
-  //       console.log("switchMap: ", data);
-  //       this.videoListForSwitchMap.push(data);
-  //     });
-  // }
-
-  getDataByChannelName(channel: string) {
-    return of(channel + ' Video Uploaded').pipe(delay(1000));
-  }
-
-  getTechData(channel: string) {
-    return of(channel + ' Video Uploaded').pipe(delay(15000));
-  }
-
-  getNewsData(channel: string) {
-    return of(channel + ' Video Uploaded').pipe(delay(5000));
-  }
-
-  getComedyData(channel: string) {
-    return of(channel + ' Video Uploaded').pipe(delay(3000));
-  }
-
-  // Method to get user by user type
-  // getUserByUserType(userType: string): Observable<any> {
-  //   switch (userType) {
-  //     case USER:
-  //       return this.userService.getUsers().pipe(delay(5000));
-  //     case SUPER_USER:
-  //       return this.userService.getSuperUsers();
-  //     default:
-  //       return new Observable();
-  //   }
-  // }
 
 }
+
+
+
+

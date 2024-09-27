@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { ObservabledataService } from '../../services/observabledata.service';
+import { MessageStorageService } from '../../services/message-storage.service';
 
 @Component({
   selector: 'app-interval',
@@ -13,7 +13,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   videoList: string[] = [];
   publishedVideoCount: number = 0;
 
-  constructor(private observableDataService: ObservabledataService) {}
+  constructor(private messageStorageService: MessageStorageService) {}
 
   ngOnInit(): void {
     this.startBroadcast();
@@ -24,7 +24,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
     this.broadcastSubscription = broadcastInterval$.subscribe((count) => {
       const videoMessage = `Video ${count + 1}`;
       this.publishedVideoCount = count + 1;
-      this.observableDataService.addData(videoMessage, this.videoList);
+      this.messageStorageService.addData(videoMessage, this.videoList);
 
       if (this.publishedVideoCount >= 5) {
         this.broadcastSubscription.unsubscribe();

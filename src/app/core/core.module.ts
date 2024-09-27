@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CoreRoutingModule } from './core-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
@@ -17,20 +15,20 @@ import { ContentComponent } from './components/content/content.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from '../shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     LoginComponent,
     SidenavComponent,
-    ContentComponent
+    ContentComponent,
+    ErrorSnackbarComponent
   ],
   imports: [
     CommonModule, 
     MatToolbarModule,
     MatCardModule,
-    SharedModule,    
-    MatSidenavModule,
     MatButtonModule, 
     MatInputModule, 
     MatFormFieldModule,
@@ -41,7 +39,6 @@ import { MatMenuModule } from '@angular/material/menu';
   exports: [
     HeaderComponent, 
     FooterComponent, 
-    ContentComponent
   ]
 })
 export class CoreModule { }

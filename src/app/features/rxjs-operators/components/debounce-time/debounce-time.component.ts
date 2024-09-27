@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-debounce-time',
@@ -7,23 +7,28 @@ import { debounceTime, distinctUntilChanged, fromEvent, map, Observable } from '
   styleUrls: ['./debounce-time.component.scss']
 })
 export class DebounceTimeComponent implements AfterViewInit {
+
+  private subscriptions = new Subscription();
   @ViewChild('searchInput1') searchInput1!: ElementRef;
   @ViewChild('searchInput2') searchInput2!: ElementRef;
 
   ngAfterViewInit(): void {
-    this.setupSearchInput1();
-    this.setupSearchInput2();
+    this.subscriptions.add(this.setupSearchInput1());
+    this.subscriptions.add(this.setupSearchInput2());
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
   private setupSearchInput1(): void {
     const searchTerm$: Observable<Event> = fromEvent(this.searchInput1.nativeElement, 'input');
 
     searchTerm$.pipe(
       map((event: Event) => (event.target as HTMLInputElement).value),
-      debounceTime(700) 
+      debounceTime(700)
     ).subscribe({
       next: (value) => {
-        console.log('Input 1:', value); 
+        console.log('Input 1:', value);
       },
       error: (err) => {
         console.error('Error occurred in Input 1:', err);

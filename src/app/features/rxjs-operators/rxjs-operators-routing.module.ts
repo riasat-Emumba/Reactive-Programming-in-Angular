@@ -23,33 +23,38 @@ import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.compon
 import { ShareReplyComponent } from './components/share-reply/share-reply.component';
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
 import { ZipComponent } from './components/zip/zip.component';
+import { CatchErrorComponent } from './components/catch-error/catch-error.component';
+import { RXJS } from 'src/app/core/constants/constants';
+
+// Define route paths as constants
+
 
 const routes: Routes = [
-  { path: '', component: RxjsDashboardComponent },
-  { path: 'fromevent', component: FromeventComponent },
-  { path: 'map', component: MapComponent },
-  { path: 'switchmap', component: SwitchmapComponent },
-  { path: 'interval', component: IntervalComponent },
-  { path: 'timer', component: TimerComponent },
-  { path: 'of-from', component: OfFromComponent },
-  { path: 'to-array', component: ToArrayComponent },
-  { path: 'custom-observable', component: CustomObservableComponent },
-  { path: 'pluck', component: PluckComponent },
-  { path: 'filter', component: FilterComponent },
-  { path: 'retry', component: RetryComponent },
-  { path: 'debounce-time', component: DebounceTimeComponent },
-  { path: 'concat', component: ConcatComponent },
-  { path: 'merge', component: MergeComponent },
-  { path: 'merge-map', component: MergeMapComponent },
-  { path: 'concat-map', component: ConcatMapComponent },
-  { path: 'compare-maps', component: CompareMapsComponent },
-  { path: 'map-in-action', component: MapsInActionComponent },
-  { path: 'exhaust-map', component: ExhaustMapComponent },
-  { path: 'share-reply', component: ShareReplyComponent },
-  { path: 'combine-latest', component: CombineLatestComponent },
-  { path: 'zip-fork-join', component: ZipComponent },
-
-
+  { path: RXJS.DASHBOARD, component: RxjsDashboardComponent },
+  { path: RXJS.FROM_EVENT, component: FromeventComponent },
+  { path: RXJS.MAP, component: MapComponent },
+  { path: RXJS.SWITCH_MAP, component: SwitchmapComponent },
+  { path: RXJS.INTERVAL, component: IntervalComponent },
+  { path: RXJS.TIMER, component: TimerComponent },
+  { path: RXJS.OF_FROM, component: OfFromComponent },
+  { path: RXJS.TO_ARRAY, component: ToArrayComponent },
+  { path: RXJS.CUSTOM_OBSERVABLE, component: CustomObservableComponent },
+  { path: RXJS.PLUCK, component: PluckComponent },
+  { path: RXJS.FILTER, component: FilterComponent },
+  { path: RXJS.RETRY, component: RetryComponent },
+  { path: RXJS.DEBOUNCE_TIME, component: DebounceTimeComponent },
+  { path: RXJS.CONCAT, component: ConcatComponent },
+  { path: RXJS.MERGE, component: MergeComponent },
+  { path: RXJS.MERGE_MAP, component: MergeMapComponent },
+  { path: RXJS.CONCAT_MAP, component: ConcatMapComponent },
+  { path: RXJS.COMPARE_MAPS, component: CompareMapsComponent },
+  { path: RXJS.MAPS_IN_ACTION, component: MapsInActionComponent },
+  { path: RXJS.EXHAUST_MAP, component: ExhaustMapComponent },
+  { path: RXJS.SHARE_REPLY, component: ShareReplyComponent },
+  { path: RXJS.COMBINE_LATEST, component: CombineLatestComponent },
+  { path: RXJS.ZIP, component: ZipComponent },
+  { path: RXJS.CATCH_ERROR, component: CatchErrorComponent },
+  { path: RXJS.WILDCARD, redirectTo: RXJS.DASHBOARD }
 ];
 
 @NgModule({

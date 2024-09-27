@@ -1,48 +1,69 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { MESSAGES, PATHS } from '../../constants/constants';
+import { NotificationService } from '../../services/notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent {
-  title : string  = ''
+
+  welcomeMsg = MESSAGES.WELCOME;
+  projectName = MESSAGES.PROJECT_NAME;
   isLoggedIn: boolean = false;
-  constructor(private authService: AuthService, private router: Router,private location: Location) {}
+  private subscription!: Subscription;
+  constructor(private authService: AuthService, private notificationService: NotificationService,
+    private router: Router) {}
 
   ngOnInit() {
     this.userLoggedIn()
   }
 
   userLoggedIn() {
-    this.authService.loggedIn$.subscribe(loggedIn => {
+    this.subscription = this.authService.loggedIn$.subscribe({
+      next: (loggedIn) => {
       this.isLoggedIn = loggedIn;
-      this.title = !loggedIn ? 'Welcome' : 'Async Architecture'
+      },
+      error: (err) => {
+        this.notificationService.showError(err);
+      }
     });
   }
 
   logOut() {
     this.authService.logout();
-    this.router.navigate([''])
+    this.router.navigate([PATHS.EMPTY]);
+    this.subscription.unsubscribe();
   }
 
   navigateToPromiseDashboard() {
-    this.router.navigate(['promise-dashboard']);
+    this.router.navigate([PATHS.PROMISE_DASHBOARD]);
   }
 
   navigateToHome() {
-    this.router.navigate(['home']);
+    this.router.navigate([PATHS.HOME]);
   }
 
   navigateToRxjsDashboard() {
-    this.router.navigate(['rxjs-dashboard']);
+    this.router.navigate([PATHS.RXJS_DASHBOARD]);
   }
 
-  // goBack() {
-  //   this.location.back();
-  // }
+  goBack() {
+    const currentUrl = this.router.url;
+    const urlSegments = currentUrl.split('/').filter(segment => segment);
+
+    if (urlSegments.length > 1) {
+      urlSegments.pop();
+      const newUrl = '/' + urlSegments.join('/');
+      this.router.navigate([newUrl]);
+    } else {
+      this.router.navigate([PATHS.HOME]);
+    }
+  }
 
 }

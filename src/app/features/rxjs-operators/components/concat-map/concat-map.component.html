@@ -1,44 +1,38 @@
 <h3 class="mb-0"><strong>Concat Map</strong></h3>
 <p>Flattening Operator. It gets the stream and converts it to data. It is a coombination of map + megeAll </p>
 
-
 <div class="row">
     <div class="col-md-4">
         <strong>Example -01 | Map</strong>
         <hr>
         <p class="bg-light py-2 px-3 border rounded">
-            <strong>Videos</strong> : ["Tech", "Comedy", "News"]
+            <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
         <ul *ngFor="let user of userListForMap">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
-
     </div>
     <div class="col-md-4">
         <strong>Example -02 | map + ConcatAll</strong>
         <hr>
         <p class="bg-light py-2 px-3 border rounded">
-            <strong>Videos</strong> : ["Tech", "Comedy", "News"]
+            <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
         <ul *ngFor="let user of userListForMapAndConcatAll">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
-
     </div>
     <div class="col-md-4">
         <strong>Example -03 | ConcatMap</strong>
         <hr>
         <p class="bg-light py-2 px-3 border rounded">
-            <strong>Videos</strong> : ["Tech", "Comedy", "News"]
+            <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
         <ul *ngFor="let user of userListForConcatMap">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
-
     </div>
-
-
 </div>

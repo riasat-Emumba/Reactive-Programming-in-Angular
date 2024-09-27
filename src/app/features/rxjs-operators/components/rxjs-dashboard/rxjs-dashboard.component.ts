@@ -38,6 +38,7 @@ export class RxjsDashboardComponent implements OnInit {
       { name: 'Share-reply', link: '/rxjs-dashboard/share-reply' },
       { name: 'Combine-latest', link: '/rxjs-dashboard/combine-latest' },
       { name: 'Zip & ForkJoin', link: '/rxjs-dashboard/zip-fork-join' },
+      { name: 'CatchError', link: '/rxjs-dashboard/catch-error' },
       // Add more operators as needed
     ];
   }

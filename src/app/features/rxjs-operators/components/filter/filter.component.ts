@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, from, map, mergeMap, of, tap, toArray } from 'rxjs';
-import { UserService } from '../../services/user.service';
-import { ISuperUser } from '../../models/super-userinterface';
+import { ISuperUser } from '../../models/isuper-user';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-filter',
@@ -13,7 +13,7 @@ export class FilterComponent implements OnInit {
   userDataByGender!: ISuperUser[];
   userDataByNthItem!: ISuperUser[];
 
-  constructor(private userService: UserService) { }
+  constructor(private apiService: ApiService) { }
   ngOnInit(): void {
     this.filterById();
     // this.filterById1();
@@ -32,7 +32,7 @@ export class FilterComponent implements OnInit {
   // }
 
   filterById() {
-    this.userService.getSuperUsers().pipe(
+    this.apiService.getSuperUsers().pipe(
       map(users => users.filter(user => user.id > 2)),
       tap(data => console.log(data)),
     ).subscribe((data) => {
@@ -42,7 +42,7 @@ export class FilterComponent implements OnInit {
   }
 
   filterByGender() {
-    this.userService.getSuperUsers().pipe(
+    this.apiService.getSuperUsers().pipe(
       map(users => users.filter(user => user.gender === "Male")),
     ).subscribe((data) => {
       this.userDataByGender = data;
@@ -50,7 +50,7 @@ export class FilterComponent implements OnInit {
   }
 
   filterByNthItem() {
-    this.userService.getSuperUsers().pipe(
+    this.apiService.getSuperUsers().pipe(
       map(users => users.filter(user => user.id >= 4)),
     ).subscribe((data) => {
       this.userDataByNthItem = data;

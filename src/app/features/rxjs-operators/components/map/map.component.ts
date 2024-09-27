@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, Observer, of, tap } from 'rxjs';
-import { IUser } from '../../models/userinterface';
-import { UserService } from '../../services/user.service';
-import { PREMIUM_MEMBERSHIP } from 'src/app/core/constants/constants';
+import { IUser } from '../../models/iuser';
+import {  UserRole } from 'src/app/core/constants/constants';
+import { ApiService } from '../../services/api.service';
 
 interface ITransformedUser {
   id: number;
@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
   originalUsers$!: Observable<IUser[]>;
   transformedUsers$!: Observable<ITransformedUser[]>;
 
-  constructor(private userService: UserService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.initializeUserData();
@@ -30,7 +30,7 @@ export class MapComponent implements OnInit {
   }
 
   private initializeUserData(): void {
-    this.originalUsers$ = this.userService.getUsers();
+    this.originalUsers$ = this.apiService.getUsers();
   }
 
   private transformUserData(): void {
@@ -44,7 +44,7 @@ export class MapComponent implements OnInit {
     return {
       id: user.id,
       fullName: `${user.firstname} ${user.lastname}`,
-      discount: user.membershiplevel === PREMIUM_MEMBERSHIP ? '20%' : '0%',
+      discount: user.membershiplevel === UserRole.PREMIUM_MEMBERSHIP ? '20%' : '0%',
       membershipLevel: user.membershiplevel
     };
   }

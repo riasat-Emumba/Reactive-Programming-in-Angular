@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { catchError, map, Observable, shareReplay } from 'rxjs';
+import { catchError, delay, map, Observable, shareReplay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-share-reply',
@@ -21,7 +21,7 @@ export class ShareReplyComponent implements OnInit {
 
   getPhotos() {
     this.allPhotos$ = this.apiService.getPhotos().pipe(
-      shareReplay(1)
+      shareReplay(1), 
     );
 
     const filterPhotos = (start: number, end: number) =>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
-import { ObservabledataService } from '../../services/observabledata.service';
+import { MessageStorageService } from '../../services/message-storage.service';
 
 @Component({
   selector: 'app-timer',
@@ -13,7 +13,7 @@ export class TimerComponent implements OnInit {
   broadCastedVideoList: string[] = [];
   totalPublishedVideos: number = 0;
 
-  constructor(private observableDataService: ObservabledataService) { }
+  constructor(private messageStorageService: MessageStorageService) { }
   ngOnInit(): void {
     this.startVideoBroadCast();
   }
@@ -25,7 +25,7 @@ export class TimerComponent implements OnInit {
       console.log(msgFromObservable);
       
       this.totalPublishedVideos = data;
-      this.observableDataService.addData(msgFromObservable, this.broadCastedVideoList)
+      this.messageStorageService.addData(msgFromObservable, this.broadCastedVideoList)
       // Used to stop emitting more data after below condition is true
       if (data >= 5) {
         this.broadCastSubscription.unsubscribe();

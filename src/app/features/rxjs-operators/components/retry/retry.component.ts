@@ -19,7 +19,7 @@ export class RetryComponent implements OnInit {
   // RetryWhen
   getUserDetails() {
     this.status = "Fetching...";
-    this.apiService.fetchUserDetails().pipe(
+    this.apiService.fetchUsersDetail().pipe(
       retryWhen(error => error.pipe(
         delay(7000),
         scan(retryCount =>{

@@ -2,17 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { MesageService } from '../../services/mesage.service';
+import { MESSAGES, PATHS } from '../../constants/constants';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit {
+ 
   loginForm!: FormGroup;
-  message: string = 'Welcome'
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private messageService: MesageService) { }
+ 
+  constructor(private fb: FormBuilder, 
+    private router: Router, 
+    private notificationService: NotificationService,
+    private authService: AuthService) { }
+
   ngOnInit(): void {
     this.initForm();
     this.checkLoginStatus();
@@ -34,30 +41,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private checkLoginStatus(): void {
-    if (this.authService.isLoggedIn()) {
-      // this.ngZone.run(() => {
-      this.router.navigate(['home']);
-      // });
-    }
-  }
-
-  onLogin(): void {
-    this.authService.login();
-  }
-
-  onLogout(): void {
-    this.authService.logout();
-  }
-
-  navigateToHome(): void {
-    this.router.navigate(['home']);
-  }
-
-  get loginFormControls() {
-    return this.loginForm.controls;
-  }
-
   private processLogin(userName: string, password: string): void {
     if (this.isLoginSuccessful(userName, password)) {
       this.handleLogin(userName, password);
@@ -72,29 +55,39 @@ export class LoginComponent implements OnInit {
     return (storedUserName === userName && storedPassword === password) || (!storedUserName && !storedPassword);
   }
 
+  private checkLoginStatus(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate([PATHS.HOME]);
+    }
+  }
+
   private handleLogin(userName: string, password: string): void {
     if (!localStorage.getItem('userName') && !localStorage.getItem('password')) {
       localStorage.setItem('userName', userName);
       localStorage.setItem('password', password);
     }
-    // console.log('Login successful!', { userName, password });
-    this.onLogin();
-    this.navigateToHome();
+  
+    this.authService.login();;
+    this.router.navigate([PATHS.HOME]);
   }
 
   private handleInvalidLogin(): void {
-    console.error('Invalid username or password');
-    this.onLogout();
-    this.router.navigate(['']);
+    this.notificationService.showError(MESSAGES.INVALID_USERNAME_OR_PASSWORD);
+    this.authService.logout();
+    this.router.navigate([PATHS.EMPTY]);
   }
 
   private validateFormFields(): void {
     if (this.loginFormControls['userName']?.errors?.['required']) {
-      console.error('User Name is required');
+      this.notificationService.showError(MESSAGES.USERNAME_IS_REQUIRED);
     }
     if (this.loginFormControls['password']!.errors?.['required']) {
-      console.error('Password is required');
+      this.notificationService.showError(MESSAGES.PASSWORD_IS_REQUIRED);
     }
+  }
+
+  get loginFormControls() {
+    return this.loginForm.controls;
   }
 
 }
