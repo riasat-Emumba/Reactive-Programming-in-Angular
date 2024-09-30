@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of userDataByNameLength">
+                <tr *ngFor="let item of usersById">
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.gender }}</td>
@@ -43,31 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of userDataByGender">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.gender }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="col-md-4">
-        <strong>Example 3</strong>
-        <hr>
-        <div class="bg-light py-2 px-3 border rounded">
-            <strong>Filter:</strong> by nth item
-        </div>
-        <table class="table table-striped mt-2">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of userDataByNthItem">
+                <tr *ngFor="let item of usersByGender">
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.gender }}</td>

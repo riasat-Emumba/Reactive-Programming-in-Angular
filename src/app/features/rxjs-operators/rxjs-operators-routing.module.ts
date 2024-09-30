@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RxjsDashboardComponent } from './components/rxjs-dashboard/rxjs-dashboard.component';
-import { FromeventComponent } from './components/fromevent/fromevent.component';
+import { FromEventComponent } from './components/fromevent/fromevent.component';
 import { MapComponent } from './components/map/map.component';
 import { SwitchmapComponent } from './components/switchmap/switchmap.component';
 import { IntervalComponent } from './components/interval/interval.component';
@@ -31,7 +31,7 @@ import { RXJS } from 'src/app/core/constants/constants';
 
 const routes: Routes = [
   { path: RXJS.DASHBOARD, component: RxjsDashboardComponent },
-  { path: RXJS.FROM_EVENT, component: FromeventComponent },
+  { path: RXJS.FROM_EVENT, component: FromEventComponent },
   { path: RXJS.MAP, component: MapComponent },
   { path: RXJS.SWITCH_MAP, component: SwitchmapComponent },
   { path: RXJS.INTERVAL, component: IntervalComponent },

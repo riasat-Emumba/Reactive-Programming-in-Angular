@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../models/iuser';
-import { map, Observable, pluck } from 'rxjs';
+import { flatMap, map, Observable, pluck, tap } from 'rxjs';
 import { ApiService } from '../../services/api.service';
-import { MessageStorageService } from '../../services/message-storage.service';
 
 @Component({
   selector: 'app-pluck',
@@ -12,21 +11,27 @@ import { MessageStorageService } from '../../services/message-storage.service';
 export class PluckComponent implements OnInit {
 
   userObservable$! : Observable<IUser[]>;
-  constructor(private msgStorageService: MessageStorageService){
+  constructor(private apiService: ApiService){
   }
 
   ngOnInit(): void {
-    // this.getUserObjects();
+    this.getUserObjects();
   }
 
-  // getUserObjects() {
-  //   this.userObservable$ = this.msgStorageService.getUserObjects();
-  //   this.userObservable$.pipe(
-  //     pluck('firstname')
-  //   ).subscribe((value) =>{
-  //     console.log(value);
-  //   })
-  // }
-
+  getUserObjects() {
+    this.userObservable$ = this.apiService.getUsers();
+    this.userObservable$.pipe(
+      tap((value) => console.log(value)),
+      flatMap((users) => {
+        console.log(users);
+        return users.map((user) => {
+            return user;
+        })
+      }),
+      pluck('firstname')
+    ).subscribe((value) =>{
+      console.log(value);
+    })
+  }
 
 }

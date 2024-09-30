@@ -9,43 +9,49 @@ import { MessageStorageService } from '../../services/message-storage.service';
   templateUrl: './fromevent.component.html',
   styleUrls: ['./fromevent.component.scss']
 })
-export class FromeventComponent implements OnInit, AfterViewInit {
+export class FromEventComponent implements AfterViewInit {
 
-  @ViewChild("addBtn") addBtn!: ElementRef;
-  addBtn$!: Observable<string>
-  windowResize$!: Observable<Event>
-  windowSizeObject: IWindowSize = {
-    innerheight: 0,
-    innerwidth: 0
-  }
-
-  videosList: string[] = [];
+  @ViewChild('addBtn') addBtn!: ElementRef;
+  
+  public addBtn$!: Observable<Event>;
+  public windowSize$: Observable<Event> = fromEvent(window, 'resize');
+  public windowSizeObject: IWindowSize = { innerheight: 0, innerwidth: 0 };
+  public videosList: string[] = [];
 
   constructor(private messageStorageService: MessageStorageService) {}
-  ngOnInit(): void {
-  }
 
   ngAfterViewInit(): void {
-    this.onResizeOfWindow();
-    this.onBtnClick();
+    this.setupWindowResizeListener();
+    this.setupButtonClickListener();
   }
 
-  onResizeOfWindow() {
-    this.windowResize$ = fromEvent(window, 'resize');
-    this.windowResize$.subscribe(() => {
-      this.windowSizeObject.innerheight = window.innerHeight;
-      this.windowSizeObject.innerwidth = window.innerWidth;
-      // console.log('Window resized:', window.innerWidth, window.innerHeight);
-    })
-  }
-
-  onBtnClick() {
-    let count = 1
-    this.addBtn$ = fromEvent(this.addBtn.nativeElement, 'click');
-    this.addBtn$.subscribe(() => {
-      let videoCounter = "Video : " + count++;
-      this.messageStorageService.addData(videoCounter, this.videosList)
+  private setupWindowResizeListener(): void {
+    this.windowSize$.subscribe({
+      next: () => this.updateWindowSize(),
+      error: (err) => console.error('Resize error: ', err)
     });
+  }
+
+  private setupButtonClickListener(): void {
+    let count = 1;
+    this.addBtn$ = fromEvent(this.addBtn.nativeElement, 'click');
+    
+    this.addBtn$.subscribe({
+      next: () => {
+        const videoCounter = `Video: ${count++}`;
+        this.messageStorageService.addData(videoCounter, this.videosList);
+        this.videosList = this.messageStorageService.getData();
+        console.log('Videos List: ', this.videosList);
+        
+      },
+      error: (err) => console.error('Click event error: ', err)
+    });
+  }
+
+  private updateWindowSize(): void {
+    this.windowSizeObject.innerheight = window.innerHeight;
+    this.windowSizeObject.innerwidth = window.innerWidth;
+
   }
 
 }

@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RxjsOperatorsRoutingModule } from './rxjs-operators-routing.module';
 import { RxjsDashboardComponent } from './components/rxjs-dashboard/rxjs-dashboard.component';
-import { MatButtonModule } from '@angular/material/button';
-import { FromeventComponent } from './components/fromevent/fromevent.component';
-
-import {MatGridListModule} from '@angular/material/grid-list';
+import { FromEventComponent } from './components/fromevent/fromevent.component';
 import { SwitchmapComponent } from './components/switchmap/switchmap.component';
 import { MapComponent } from './components/map/map.component';
 import { IntervalComponent } from './components/interval/interval.component';
@@ -24,9 +20,7 @@ import { MergeComponent } from './components/merge/merge.component';
 import { MergeMapComponent } from './components/merge-map/merge-map.component';
 import { ConcatMapComponent } from './components/concat-map/concat-map.component';
 import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
-import { MatCardModule } from '@angular/material/card';
 import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
@@ -34,12 +28,11 @@ import { ShareReplyComponent } from './components/share-reply/share-reply.compon
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
 import { ZipComponent } from './components/zip/zip.component';
 import { CatchErrorComponent } from './components/catch-error/catch-error.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     RxjsDashboardComponent,
-    FromeventComponent,
+    FromEventComponent,
     SwitchmapComponent,
     MapComponent,
     IntervalComponent,

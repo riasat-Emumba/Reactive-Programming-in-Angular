@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, map, merge, Observable, take } from 'rxjs';
+import { interval, map, merge, Observable, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-merge',
@@ -7,7 +7,9 @@ import { interval, map, merge, Observable, take } from 'rxjs';
   styleUrls: ['./merge.component.scss']
 })
 export class MergeComponent implements OnInit {
+  
   finalStreamData: string[] = [];
+  private subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.getFinalObservableUsingMerge();
@@ -19,10 +21,14 @@ export class MergeComponent implements OnInit {
     const newsObs = this.getDataStream('NewsVideo', 4);
 
     const finalObservable = merge(techObs, comedyObs, newsObs);
-    finalObservable.subscribe(data => {
-      console.log(data);
-      this.finalStreamData.push(data);
-    });
+
+    // Store the subscription to unsubscribe later
+    this.subscription.add(
+      finalObservable.subscribe(data => {
+        console.log(data);
+        this.finalStreamData.push(data);
+      })
+    );
   }
 
   private getDataStream(videoType: string, count: number): Observable<string> {
@@ -30,6 +36,10 @@ export class MergeComponent implements OnInit {
       map(index => `${videoType} #${index + 1}`),
       take(count)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); 
   }
   
 }

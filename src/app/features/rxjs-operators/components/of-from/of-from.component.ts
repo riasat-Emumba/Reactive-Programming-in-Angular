@@ -7,103 +7,82 @@ import { from, interval, of, take, tap } from 'rxjs';
   styleUrls: ['./of-from.component.scss'],
 })
 export class OfFromComponent implements OnInit {
-  laptopCompaniesList: string[] = [];
-  processorCompaniesList: string[] = [];
-  messageFrompromise: string = '';
+
+  laptopCompanies: string[] = [];
+  processorCompanies: string[] = [];
+  purchaseMessage: string = '';
 
   ngOnInit(): void {
-    this.ofOperatorExample();
-    this.fromOperatorExample();
-    this.promiseToObservable();
-    this.createPromise();
-    this.fromExample();
-    this.ofExample();
+    this.demonstrateOfOperator();
+    this.demonstrateFromOperator();
+    this.convertPromiseToObservable();
+    this.createPurchasePromise();
   }
 
-  fromExample() {
-    const numberArray = [{ a: 10},{b: 20}, {c:30},{d: 40}, {e:50}];
+  private demonstrateFromOperator(): void {
+    const numberArray = [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }, { e: 50 }];
     const numberArray$ = from(numberArray);
+    
     numberArray$.subscribe({
-      next: (value) => {
-        console.log(value);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('From is completed');
-      },
+      next: (value) => console.log(value),
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('From operator completed'),
     });
   }
 
-  ofExample() {
-    const numberArray = [{ a: 10},{b: 20}, {c:30},{d: 40}, {e:50}];
-    const numberArray$ = of(numberArray);
+  private demonstrateOfOperator(): void {
+    const numberArray = [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }, { e: 50 }];
+    const numberArray$ = of(...numberArray); // Spread operator to emit each object separately
+    
     numberArray$.subscribe({
-      next: (value) => {
-        console.log(value);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('From is completed');
-      },
+      next: (value) => console.log(value),
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Of operator completed'),
     });
   }
-  createPromise() {
-    this.messageFrompromise = 'Purchasing....';
-    const buyCar = new Promise((resolve) => {
+
+  private createPurchasePromise(): Promise<string> {
+    this.purchaseMessage = 'Purchasing....';
+    
+    return new Promise((resolve) => {
       setTimeout(() => {
-        let msg = 'Car has been purchased';
-        resolve(msg);
+        resolve('Car has been purchased');
       }, 5000);
     });
-    return buyCar;
   }
 
-  promiseToObservable() {
-    const buyCar = from(this.createPromise());
-    console.log(buyCar);
-    buyCar.subscribe({
-      next: (value: any) => {
-        this.messageFrompromise = value;
+  // Convert promise to observable
+  private convertPromiseToObservable(): void {
+    const purchasePromise$ = from(this.createPurchasePromise());
+    
+    purchasePromise$.subscribe({
+      next: (value: string) => {
+        this.purchaseMessage = value;
       },
+      error: (error) => console.error('Error:', error),
     });
   }
 
-  ofOperatorExample() {
-    let laptopPrices = [25000, 30000];
-    let laptopCompanies = 'hp, Dell, Lenovo';
-    // Second Example
-    // let randomData = [laptopCompanies, 30, 100, laptopPrices];
-    const laptopCompanies$ = of(laptopCompanies);
+  private demonstrateOfOperatorWithCompanies(): void {
+    const laptopCompaniesString = 'HP, Dell, Lenovo';
+    const laptopCompanies$ = of(laptopCompaniesString);
+    
     laptopCompanies$.subscribe({
-      next: (val: any) => {
-        this.laptopCompaniesList.push(val);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('Of is completed');
-      },
+      next: (company) => this.laptopCompanies.push(company),
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('Of operator with companies completed'),
     });
   }
 
-  fromOperatorExample() {
-    let processorCompanies = ['intel', 'IBM', 'Apple'];
+  private demonstrateFromOperatorWithProcessors(): void {
+    const processorCompanies = ['Intel', 'IBM', 'Apple'];
     const processorCompanies$ = from(processorCompanies);
+    
     processorCompanies$.subscribe({
-      next: (val) => {
-        this.processorCompaniesList.push(val);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('From is completed');
-      },
+      next: (company) => this.processorCompanies.push(company),
+      error: (error) => console.error('Error:', error),
+      complete: () => console.log('From operator with processors completed'),
     });
   }
+
 }

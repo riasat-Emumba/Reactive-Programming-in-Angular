@@ -9,9 +9,10 @@ import { interval, Subscription, take, toArray } from 'rxjs';
 export class ToArrayComponent implements OnInit {
 
   sourceSubscription!: Subscription;
-  ngOnInit(): void {
-    this.applyInterval();
 
+  ngOnInit(): void {
+    this.withoutToArray();
+    this.withToArray();
   }
 
   useInterval() {
@@ -19,15 +20,26 @@ export class ToArrayComponent implements OnInit {
     return source;
   }
 
-  applyInterval() {
+  withoutToArray() {
+    const source = this.useInterval();
+    this.sourceSubscription = source.pipe(
+      take(10),
+    ).subscribe((val) => {
+      console.log("withOutToArray : ", val);
+
+    })
+
+  }
+
+  withToArray() {
     const source = this.useInterval();
     this.sourceSubscription = source.pipe(
       take(10),
       toArray()
     ).subscribe((val) => {
-      console.log(val);
+      console.log("withToArray : ", val);
 
     })
-
   }
+
 }

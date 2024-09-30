@@ -10,7 +10,7 @@
             <strong>Videos</strong> : ["Tech", "Comedy", "News"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForMap">
+        <ul *ngFor="let user of userListWithMap">
             <li>{{user.name  ?? user.firstname }}</li>
         </ul>
 
@@ -22,7 +22,7 @@
             <strong>Videos</strong> : ["Tech", "Comedy", "News"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForMapAndMergeAll">
+        <ul *ngFor="let user of userListWithMapAndMergeAll">
             <li>{{user.name  ?? user.firstname }}</li>
         </ul>
 
@@ -34,7 +34,7 @@
             <strong>Videos</strong> : ["Tech", "Comedy", "News"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForMergeMap">
+        <ul *ngFor="let user of userListWithMergeMap">
             <li>{{user.name  ?? user.firstname }}</li>
         </ul>
 

@@ -1,30 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, Observer, of, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { IUser } from '../../models/iuser';
-import {  UserRole } from 'src/app/core/constants/constants';
+import { UserRole } from 'src/app/core/constants/constants';
 import { ApiService } from '../../services/api.service';
-
-interface ITransformedUser {
-  id: number;
-  fullName: string;
-  discount: string;
-  membershipLevel: string;
-}
+import { ITransformedUser } from '../../models/itransformed-user';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-
-
 export class MapComponent implements OnInit {
-  originalUsers$!: Observable<IUser[]>;
-  transformedUsers$!: Observable<ITransformedUser[]>;
 
-  constructor(private apiService: ApiService) { }
+  public originalUsers$!: Observable<IUser[]>;
+  public transformedUsers$!: Observable<ITransformedUser[]>;
+
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
+    this.loadUserData(); 
+  }
+
+  private loadUserData(): void {
     this.initializeUserData();
     this.transformUserData();
   }
@@ -36,7 +33,7 @@ export class MapComponent implements OnInit {
   private transformUserData(): void {
     this.transformedUsers$ = this.originalUsers$.pipe(
       map(users => users.map(user => this.transformUser(user))),
-      tap(users => console.log('Transformed Users:', users))
+      tap(transformed => console.log('Transformed Users:', transformed))
     );
   }
 
@@ -49,7 +46,3 @@ export class MapComponent implements OnInit {
     };
   }
 }
-
-
-
-

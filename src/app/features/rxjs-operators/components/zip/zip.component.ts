@@ -8,69 +8,77 @@ import { Observable, fromEvent, pluck, map, catchError, withLatestFrom, combineL
 })
 export class ZipComponent {
 
-  // nameSource = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];
-  nameSource = ["Ali", "Ahmed", "Kashif"];
-  colorSource = ['red', 'green', 'blue', 'yellow'];
-  // colorSource = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
+  // nameOptions = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];
+  // colorOptions = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
+  nameOptions = ["Ali", "Ahmed", "Kashif"];
+  colorOptions = ['red', 'green', 'blue', 'yellow'];
 
-  @ViewChild('name') name!: ElementRef <HTMLSelectElement>;
-  @ViewChild('color') color!: ElementRef <HTMLSelectElement>;
+  @ViewChild('name') nameSelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('color') colorSelect!: ElementRef<HTMLSelectElement>;
 
   ngAfterViewInit(): void {
-    this.zipOperator();
-    this.forkJoinOperator();
+    this.initializeZipOperator();
+    this.initializeForkJoinOperator();
   }
-//  To implement the forkJoin operator we need to use take as it will complete the observable after 3 values, so that we can verify the forkJoin operator.
-  nameEvent(): Observable<string> {
-    return fromEvent<Event>(this.name.nativeElement, 'change').pipe(
+
+  private nameChangeEvent(): Observable<string> {
+    return fromEvent<Event>(this.nameSelect.nativeElement, 'change').pipe(
       pluck('target', 'value'),
-      map(value => value as string), 
+      map(value => value as string),
       catchError(error => {
-        console.error('Error in nameEvent:', error);
-        return [];
+        console.error('Error in nameChangeEvent:', error);
+        return []; // Return an empty array for handling errors
       })
     );
   }
 
-  colorEvent(): Observable<string> {
-    return fromEvent<Event>(this.color.nativeElement, 'change').pipe(
+  private colorChangeEvent(): Observable<string> {
+    return fromEvent<Event>(this.colorSelect.nativeElement, 'change').pipe(
       map(event => (event.target as HTMLSelectElement).value),
-      
       catchError(error => {
-        console.error('Error in colorEvent:', error);
-        return [];
+        console.error('Error in colorChangeEvent:', error);
+        return []; // Return an empty array for handling errors
       })
     );
   }
 
-  forkJoinOperator(): void {
-   forkJoin(this.nameEvent(), this.colorEvent()).subscribe(([name,color]) => {
-      console.log(name, color);
-      this.createBox(name, color, 'forkJoinContainer');
-   }
-  )
-  }
-  
-  zipOperator(): void {
-    zip(this.nameEvent(), this.colorEvent()).subscribe(([name,color]) =>{
-      console.log(name,color);
-      this.createBox(name, color, 'zipContainer');
-    } )
+  private initializeForkJoinOperator(): void {
+    forkJoin([this.nameChangeEvent(), this.colorChangeEvent()]).subscribe({
+      next: ([name, color]) => {
+        console.log(name, color);
+        this.createBox(name, color, 'forkJoinContainer');
+      },
+      error: (err) => {
+        console.error('Error in forkJoinOperator:', err);
+      }
+    });
   }
 
-  createBox(name: string, color: string, containerId: string) {
-    let el = document.createElement('div');
-    el.innerText = name;
-    el.style.backgroundColor = color;
-    el.style.color = 'white';
-    el.style.padding = '10px';
-    el.style.margin = '5px';
-    el.style.borderRadius = '5px';
-    el.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
-    el.style.display = 'inline-block';
-    el.style.fontSize = '16px';
-    el.style.fontWeight = 'bold';
-    document.getElementById(containerId)?.appendChild(el);
+  private initializeZipOperator(): void {
+    zip(this.nameChangeEvent(), this.colorChangeEvent()).subscribe({
+      next: ([name, color]) => {
+        console.log(name, color);
+        this.createBox(name, color, 'zipContainer');
+      },
+      error: (err) => {
+        console.error('Error in zipOperator:', err);
+      }
+    });
+  }
+
+  private createBox(name: string, color: string, containerId: string): void {
+    const boxElement = document.createElement('div');
+    boxElement.innerText = name;
+    boxElement.style.backgroundColor = color;
+    boxElement.style.color = 'white';
+    boxElement.style.padding = '10px';
+    boxElement.style.margin = '5px';
+    boxElement.style.borderRadius = '5px';
+    boxElement.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
+    boxElement.style.display = 'inline-block';
+    boxElement.style.fontSize = '16px';
+    boxElement.style.fontWeight = 'bold';
+    document.getElementById(containerId)?.appendChild(boxElement);
   }
 
 }

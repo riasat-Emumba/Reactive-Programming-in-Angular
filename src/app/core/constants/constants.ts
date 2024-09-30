@@ -79,3 +79,13 @@ export enum UserRole {
   // Login Status Key
   export const LOGIN_STATUS_KEY = 'isLoggedIn';
   
+  export const USER_STATUS_MESSAGES = {
+    NO_DATA: 'No Data',
+    FETCHING: 'Fetching...',
+    DATA_FETCHED: 'Data Fetched',
+    RETRYING: 'Retrying attempt #',
+    PROBLEM_FETCHING: 'Problem Fetching Data',
+    MAX_RETRY: 'Maximum retry attempts reached'
+  };
+  
+  export const RETRY_LIMIT = 3;

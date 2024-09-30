@@ -11,7 +11,7 @@
                     <h5 class="card-title"><strong>Names</strong></h5>
                     <hr>
                     <select class="form-control mb-3" #name>
-                        <option *ngFor="let name of nameSource" value="{{name}}">{{name}}</option>
+                        <option *ngFor="let name of nameOptions" value="{{name}}">{{name}}</option>
                     </select>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <h5 class="card-title"><strong>Colors</strong></h5>
                     <hr>
                     <select class="form-control" #color>
-                        <option *ngFor="let color of colorSource" value="{{color}}">{{color}}</option>
+                        <option *ngFor="let color of colorOptions" value="{{color}}">{{color}}</option>
                     </select>
                 </div>
             </div>

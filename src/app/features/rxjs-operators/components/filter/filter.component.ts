@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, from, map, mergeMap, of, tap, toArray } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { ISuperUser } from '../../models/isuper-user';
 import { ApiService } from '../../services/api.service';
 
@@ -9,53 +9,37 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  userDataByNameLength!: ISuperUser[];
-  userDataByGender!: ISuperUser[];
-  userDataByNthItem!: ISuperUser[];
+
+  public usersById!: ISuperUser[];
+  public usersByGender!: ISuperUser[];
 
   constructor(private apiService: ApiService) { }
+
   ngOnInit(): void {
-    this.filterById();
-    // this.filterById1();
-    this.filterByGender();
-    this.filterByNthItem();
+    this.loadFilteredUsers();
   }
 
-  // filterById1() {
-  //   this.userService.getSuperUsers().pipe(
-  //   map(users => from(users)), 
-  //   tap(data => console.log(data))
-  // ).subscribe((data) => {
-  //     console.log(data);
-  //     // this.userDataByNameLength = data;
-  //   });
-  // }
+  private loadFilteredUsers(): void {
+    this.filterById();
+    this.filterByGender();
 
-  filterById() {
+  }
+
+  private filterById(): void {
     this.apiService.getSuperUsers().pipe(
       map(users => users.filter(user => user.id > 2)),
-      tap(data => console.log(data)),
+      tap(filteredUsers => console.log(filteredUsers))
     ).subscribe((data) => {
-      console.log(data);
-      this.userDataByNameLength = data;
+      this.usersById = data;
     });
   }
 
-  filterByGender() {
+  private filterByGender(): void {
     this.apiService.getSuperUsers().pipe(
-      map(users => users.filter(user => user.gender === "Male")),
+      map(users => users.filter(user => user.gender === 'Male')),
     ).subscribe((data) => {
-      this.userDataByGender = data;
-    })
-  }
-
-  filterByNthItem() {
-    this.apiService.getSuperUsers().pipe(
-      map(users => users.filter(user => user.id >= 4)),
-    ).subscribe((data) => {
-      this.userDataByNthItem = data;
-    }
-    )
+      this.usersByGender = data;
+    });
   }
 
 }
