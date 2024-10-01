@@ -54,15 +54,15 @@ export class ApiService {
   }
 
   getVideos(): Observable<IVideo[]> {
-    return this.http.get<IVideo[]>(this.GET_VIDEOS)
+    return this.http.get<IVideo[]>(this.GET_VIDEOS).pipe(delay(8000));
   }
 
   searchVideos(searchTerm: string): Observable<IVideo[]> {
     return this.getVideos().pipe(
-      map(videos => videos.filter(video => video.title.toLowerCase().includes(searchTerm))) 
+      map(videos => videos.filter(video => video.title.toLowerCase().includes(searchTerm)))
     );
   }
-  
+
   getVideoStream(prefix: string, count: number): Observable<string> {
     return interval(1000).pipe(
       map((index) => `${prefix} #${index + 1}`),
@@ -73,7 +73,7 @@ export class ApiService {
   getUsersAsPromise(): Promise<IUser[]> {
     return lastValueFrom(this.http.get<IUser[]>(this.USERS_API));
     // return   this.http.get<any>(this.USERS_API).toPromise();
-    
+
   }
 
 
