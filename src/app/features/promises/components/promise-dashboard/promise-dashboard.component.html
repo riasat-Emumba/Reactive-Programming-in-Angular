@@ -1,7 +1,18 @@
-<div style="margin: 10px;">
-    <mat-grid-list cols="3" rowHeight="3:1">
-        <mat-grid-tile routerLink="promise">Promise</mat-grid-tile>
-        <mat-grid-tile routerLink="asyncawait">AsyncAwait</mat-grid-tile>
-        </mat-grid-list>
-    <br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Promise Dashboard</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 mb-4" *ngFor="let operator of operators">
+                <a [routerLink]="operator.link" class="text-decoration-none">
+                    <div class="card h-100 operator-card">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            {{ operator.name }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -21,6 +21,9 @@
                         Password is required
                     </mat-error>
                 </mat-form-field>
+
+                <mat-checkbox formControlName="isAdmin">Admin</mat-checkbox>
+                
                 <div class="button-container">
                     <button [disabled]="!loginForm.valid" class="w-full" mat-flat-button color="primary">Submit</button>
                 </div>

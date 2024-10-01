@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { MESSAGES, PATHS } from '../../constants/constants';
+import { MESSAGES, PATHS, USER_CREDENTIALS } from '../../constants/constants';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { NotificationService } from '../../services/notification.service';
 export class LoginComponent implements OnInit {
  
   loginForm!: FormGroup;
- 
+  
   constructor(private fb: FormBuilder, 
     private router: Router, 
     private notificationService: NotificationService,
@@ -29,31 +29,33 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required],
+      isAdmin: [false],
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const { userName, password } = this.loginForm.value;
-      this.processLogin(userName, password);
+      const { userName, password, isAdmin } = this.loginForm.value;
+      this.processLogin(userName, password, isAdmin);
     } else {
       this.validateFormFields();
     }
   }
 
-  private processLogin(userName: string, password: string): void {
-    if (this.isLoginSuccessful(userName, password)) {
-      this.handleLogin(userName, password);
+  private processLogin(userName: string, password: string, isAdmin: boolean): void {
+    if (this.isLoginSuccessful(userName, password, isAdmin)) {
+      this.handleLogin(userName, password,isAdmin);
     } else {
       this.handleInvalidLogin();
     }
   }
 
-  private isLoginSuccessful(userName: string, password: string): boolean {
-    const storedUserName = localStorage.getItem('userName');
-    const storedPassword = localStorage.getItem('password');
-    return (storedUserName === userName && storedPassword === password) || (!storedUserName && !storedPassword);
-  }
+  private isLoginSuccessful(userName: string, password: string, isAdmin: boolean): boolean {
+    const storedUserName = localStorage.getItem(USER_CREDENTIALS.USER_NAME);
+    const storedPassword = localStorage.getItem(USER_CREDENTIALS.PASSWORD);
+    const storedRole = localStorage.getItem(USER_CREDENTIALS.IS_ADMIN)!;
+    return (storedUserName === userName && storedPassword === password) || (!storedUserName && !storedPassword) || (JSON.parse(storedRole) === isAdmin);
+  } 
 
   private checkLoginStatus(): void {
     if (this.authService.isLoggedIn()) {
@@ -61,10 +63,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private handleLogin(userName: string, password: string): void {
-    if (!localStorage.getItem('userName') && !localStorage.getItem('password')) {
-      localStorage.setItem('userName', userName);
-      localStorage.setItem('password', password);
+  private handleLogin(userName: string, password: string , isAdmin: boolean): void {
+    if (!localStorage.getItem(USER_CREDENTIALS.USER_NAME) && !localStorage.getItem(USER_CREDENTIALS.PASSWORD) && !localStorage.getItem(USER_CREDENTIALS.IS_ADMIN) ) {
+      localStorage.setItem(USER_CREDENTIALS.USER_NAME, userName);
+      localStorage.setItem(USER_CREDENTIALS.PASSWORD, password);
+      localStorage.setItem(USER_CREDENTIALS.IS_ADMIN, isAdmin.toString());
     }
   
     this.authService.login();;
@@ -78,10 +81,10 @@ export class LoginComponent implements OnInit {
   }
 
   private validateFormFields(): void {
-    if (this.loginFormControls['userName']?.errors?.['required']) {
+    if (this.loginFormControls[USER_CREDENTIALS.USER_NAME]?.errors?.['required']) {
       this.notificationService.showError(MESSAGES.USERNAME_IS_REQUIRED);
     }
-    if (this.loginFormControls['password']!.errors?.['required']) {
+    if (this.loginFormControls[USER_CREDENTIALS.PASSWORD]!.errors?.['required']) {
       this.notificationService.showError(MESSAGES.PASSWORD_IS_REQUIRED);
     }
   }

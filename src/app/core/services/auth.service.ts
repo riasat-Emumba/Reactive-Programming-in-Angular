@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LOGIN_STATUS_KEY } from '../constants/constants';
+import { LOGIN_STATUS_KEY, USER_CREDENTIALS } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,13 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.loggedIn.value; 
+    return this.loggedIn.value;
   }
-  
+
+  isAdmin(): boolean {
+    return localStorage.getItem(USER_CREDENTIALS.IS_ADMIN) === 'true';
+  }
+
   private getLoginState(): boolean {
     return localStorage.getItem(this.LOGIN_STATUS_KEY) === 'true';
   }

@@ -3,22 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PromiseDashboardComponent } from './components/promise-dashboard/promise-dashboard.component';
 import { PromiseComponent } from './components/promise/promise.component';
 import { AsyncawaitComponent } from './components/asyncawait/asyncawait.component';
+import { PROMISE } from 'src/app/core/constants/constants';
 
 const routes: Routes = [
-  {
-    path: '', redirectTo: 'promise-dashboard', pathMatch: 'full'
-  },
-  {
-    path: '', component: PromiseDashboardComponent, children: [
-      {
-        path: 'promise', component: PromiseComponent
-      },
-      {
-        path: 'asyncawait', component: AsyncawaitComponent
-      },
-      
-    ]
-  }
+
+  { path: PROMISE.DASHBOARD, component: PromiseDashboardComponent },
+  { path: PROMISE.PROMISE, component: PromiseComponent },
+  { path: PROMISE.ASYNC_AWAIT, component: AsyncawaitComponent },
 ];
 
 

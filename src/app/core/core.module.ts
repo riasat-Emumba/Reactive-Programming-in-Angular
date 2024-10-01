@@ -12,10 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentComponent } from './components/content/content.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { SharedModule } from '../shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -30,6 +29,7 @@ import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackb
     MatToolbarModule,
     MatCardModule,
     MatButtonModule, 
+    MatCheckboxModule,
     MatInputModule, 
     MatFormFieldModule,
     MatIconModule,

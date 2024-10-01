@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, interval, map, Observable, of, take } from 'rxjs';
+import { delay, interval, lastValueFrom, map, Observable, of, take } from 'rxjs';
 import { IPhoto } from '../models/iphoto';
 import { IUsersDetail } from '../models/iusers-detail';
 import { IUser } from '../models/iuser';
@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this.USERS_API);
+    return this.http.get<IUser[]>(this.USERS_API)
   }
 
   getSuperUsers(): Observable<ISuperUser[]> {
@@ -69,5 +69,12 @@ export class ApiService {
       take(count)
     );
   }
+
+  getUsersAsPromise(): Promise<IUser[]> {
+    return lastValueFrom(this.http.get<IUser[]>(this.USERS_API));
+    // return   this.http.get<any>(this.USERS_API).toPromise();
+    
+  }
+
 
 }

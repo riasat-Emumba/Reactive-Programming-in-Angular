@@ -4,41 +4,38 @@ import { Router } from '@angular/router';
 import { MESSAGES, PATHS } from '../../constants/constants';
 import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
+import { MatCardLgImage } from '@angular/material/card';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent {
 
   welcomeMsg = MESSAGES.WELCOME;
   projectName = MESSAGES.PROJECT_NAME;
   isLoggedIn: boolean = false;
   private subscription!: Subscription;
-  constructor(private authService: AuthService, private notificationService: NotificationService,
-    private router: Router) {}
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.userLoggedIn()
+    this.userLoggedIn();
   }
 
   userLoggedIn() {
-    this.subscription = this.authService.loggedIn$.subscribe({
-      next: (loggedIn) => {
-      this.isLoggedIn = loggedIn;
-      },
-      error: (err) => {
-        this.notificationService.showError(err);
-      }
+    this.subscription = this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
     });
   }
 
   logOut() {
     this.authService.logout();
     this.router.navigate([PATHS.EMPTY]);
-    this.subscription.unsubscribe();
   }
 
   navigateToPromiseDashboard() {
@@ -55,15 +52,20 @@ export class HeaderComponent {
 
   goBack() {
     const currentUrl = this.router.url;
-    const urlSegments = currentUrl.split('/').filter(segment => segment);
+    const urlSegments = currentUrl
+      .split(PATHS.SLACH)
+      .filter((segment) => segment);
 
     if (urlSegments.length > 1) {
       urlSegments.pop();
-      const newUrl = '/' + urlSegments.join('/');
+      const newUrl = PATHS.SLACH + urlSegments.join(PATHS.SLACH);
       this.router.navigate([newUrl]);
     } else {
       this.router.navigate([PATHS.HOME]);
     }
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

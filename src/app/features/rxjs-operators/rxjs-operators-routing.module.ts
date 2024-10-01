@@ -24,12 +24,20 @@ import { ShareReplyComponent } from './components/share-reply/share-reply.compon
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
 import { ZipComponent } from './components/zip/zip.component';
 import { CatchErrorComponent } from './components/catch-error/catch-error.component';
-import { RXJS } from 'src/app/core/constants/constants';
+import { PATHS, RXJS } from 'src/app/core/constants/constants';
+import { authGuard } from 'src/app/core/guards/auth.guard';
 
 // Define route paths as constants
 
 
 const routes: Routes = [
+
+  // Approach 1: Lazy loading of feature module
+  // {
+  //   path: RXJS.DASHBOARD, component: RxjsDashboardComponent, canActivate:[authGuard], children: [
+  //     { path: RXJS.FROM_EVENT, component: FromEventComponent },
+  //   ]
+  // },
   { path: RXJS.DASHBOARD, component: RxjsDashboardComponent },
   { path: RXJS.FROM_EVENT, component: FromEventComponent },
   { path: RXJS.MAP, component: MapComponent },
