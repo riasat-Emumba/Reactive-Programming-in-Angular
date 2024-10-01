@@ -28,6 +28,7 @@ export const VideoCategory = {
   NEWS: 'NewsVideo',
 };
 
+export const CATEGORIES = ['Tech', 'Comedy', 'News'];
 
 export const USER_ROLES = ['User', 'Admin', 'Student', 'Teacher']
 

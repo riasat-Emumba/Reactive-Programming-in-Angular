@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { from, map, concatMap, delay, mergeMap, of, switchMap } from 'rxjs';
+import { from, map, concatMap, delay, mergeMap, of, switchMap, Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../../services/api.service';
+import { CATEGORIES } from 'src/app/core/constants/constants';
 
 @Component({
   selector: 'app-compare-maps',
@@ -10,17 +11,18 @@ import { ApiService } from '../../services/api.service';
 })
 export class CompareMapsComponent {
 
+  private unsubscribe$ = new Subject<void>();
   videoListForMap: string[] = [];
   videoListForMergeMap: string[] = [];
   videoListForConcatMap: string[] = [];
   videoListForSwitchMap: string[] = [];
-  private channelSource: string[] = ['Tech', 'Comedy', 'News'];
+  private channelSource: string[] = CATEGORIES;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     // Uncomment the method you want to test
-    // this.example1UsingMap();
+    this.executeMap();
     this.executeMergeMap();
     this.executeConcatMap();
     this.executeSwitchMap();
@@ -29,16 +31,15 @@ export class CompareMapsComponent {
 
   // Example using map operator
   // By using map we can get the data but for that we need to subscribe twice
-  // example1UsingMap(): void {
-  //   const source = ['Tech', 'Comedy', 'News'];
-  //   from(source)
-  //     .pipe(
-  //       map(channelGenre => this.getChannelData(channelGenre))
-  //     ).subscribe(data =>{
-  //       // console.log(data);
-  //       // this.videoListForMap.push(data);
-  //     }) 
-  // }
+  executeMap(): void {
+    from(this.channelSource)
+      .pipe(
+        map(channelGenre => this.getChannelData(channelGenre))
+      ).subscribe(data => {
+        console.log(data);
+        // this.videoListForMap.push(data);
+      })
+  }
 
   // Centralized method to get data based on channel genre
 
@@ -59,7 +60,8 @@ export class CompareMapsComponent {
   executeMergeMap(): void {
     from(this.channelSource)
       .pipe(
-        mergeMap(channel => this.getChannelData(channel))
+        mergeMap(channel => this.getChannelData(channel)),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe({
         next: data => {
@@ -74,7 +76,8 @@ export class CompareMapsComponent {
   executeConcatMap(): void {
     from(this.channelSource)
       .pipe(
-        concatMap(channel => this.getChannelData(channel))
+        concatMap(channel => this.getChannelData(channel)),
+        takeUntil(this.unsubscribe$)
       )
       .subscribe({
         next: data => {
@@ -100,7 +103,10 @@ export class CompareMapsComponent {
       });
   }
 
-
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
 }
 
