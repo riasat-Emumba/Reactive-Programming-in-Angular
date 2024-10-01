@@ -28,6 +28,7 @@ import { ShareReplyComponent } from './components/share-reply/share-reply.compon
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
 import { ZipComponent } from './components/zip/zip.component';
 import { CatchErrorComponent } from './components/catch-error/catch-error.component';
+import { OperatorsIntroComponent } from './components/operators-intro/operators-intro.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CatchErrorComponent } from './components/catch-error/catch-error.compon
     ShareReplyComponent,
     CombineLatestComponent,
     ZipComponent,
-    CatchErrorComponent
+    CatchErrorComponent,
+    OperatorsIntroComponent
   ],
   imports: [
     CommonModule,

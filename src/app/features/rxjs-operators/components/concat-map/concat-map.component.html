@@ -1,6 +1,7 @@
-<h3 class="mb-0"><strong>Concat Map</strong></h3>
-<p>Flattening Operator. It gets the stream and converts it to data. It is a coombination of map + megeAll </p>
-
+<app-operators-intro>
+    <p heading>Concat Map</p>
+    Flattening Operator. It gets the stream and converts it to data. It is a coombination of map + megeAll
+</app-operators-intro>
 <div class="row">
     <div class="col-md-4">
         <strong>Example -01 | Map</strong>
@@ -9,8 +10,11 @@
             <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForMap">
-            <li>{{user.name ?? user.firstname }}</li>
+        <ul>
+
+            <li *ngFor="let user of userListForMap" class="list-group-item">
+                <app-user-detail [user]="user"></app-user-detail>
+            </li>
         </ul>
     </div>
     <div class="col-md-4">
@@ -20,8 +24,10 @@
             <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForMapAndConcatAll">
-            <li>{{user.name ?? user.firstname }}</li>
+        <ul>
+            <li *ngFor="let user of userListForMapAndConcatAll" class="list-group-item">
+                <app-user-detail [user]="user"></app-user-detail>
+            </li>
         </ul>
     </div>
     <div class="col-md-4">
@@ -31,8 +37,12 @@
             <strong>User Roles</strong> : ["User", "Admin", "Other"]
         </p>
         <hr>
-        <ul *ngFor="let user of userListForConcatMap">
-            <li>{{user.name ?? user.firstname }}</li>
+
+        <ul>
+            <li *ngFor="let user of userListForConcatMap" class="list-group-item">
+                <app-user-detail [user]="user"></app-user-detail>
+            </li>
+
         </ul>
     </div>
 </div>

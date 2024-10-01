@@ -1,7 +1,11 @@
-<h3 class="mb-0"><strong>Switch Map Operators</strong></h3>
-<p>Map, SwitchAll, and SwitchMap</p>
-
-
+<app-operators-intro>
+    <p heading>Switch Map Operators</p>
+    Map, SwitchAll, and SwitchMap. Map transforms each value emitted by the source observable. SwitchAll and SwitchMap
+    both
+    cancel previous observables and only emit the most recent one. SwitchMap is a combination of map and switchAll,
+    which
+    maps each value to an observable and then flattens all of these inner observables using switchAll.
+</app-operators-intro>
 <div class="row">
     <!-- Example 01: Map -->
     <div class="col-md-4 mb-4">
@@ -19,7 +23,8 @@
                 </ul>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Result</strong>: <span class="text-primary">Map transforms each value emitted by the source observable.</span>
+                    <strong>Result</strong>: <span class="text-primary">Map transforms each value emitted by the source
+                        observable.</span>
                 </p>
             </div>
         </div>
@@ -41,7 +46,8 @@
                 </ul>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Result</strong>: <span class="text-danger">SwitchAll cancels previous observables and only emits the most recent one.</span>
+                    <strong>Result</strong>: <span class="text-danger">SwitchAll cancels previous observables and only
+                        emits the most recent one.</span>
                 </p>
             </div>
         </div>
@@ -63,7 +69,8 @@
                 </ul>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Result</strong>: <span class="text-success">SwitchMap cancels previous observables and only emits the most recent one.</span>
+                    <strong>Result</strong>: <span class="text-success">SwitchMap cancels previous observables and only
+                        emits the most recent one.</span>
                 </p>
             </div>
         </div>
@@ -74,8 +81,8 @@
         <div class="alert alert-info" role="alert">
             <h4 class="alert-heading">Conclusion</h4>
             <p>
-                SwitchAll and SwitchMap both cancel previous observables and only emit the most recent one. 
-                SwitchMap is a combination of map and switchAll, which maps each value to an observable and then 
+                SwitchAll and SwitchMap both cancel previous observables and only emit the most recent one.
+                SwitchMap is a combination of map and switchAll, which maps each value to an observable and then
                 flattens all of these inner observables using switchAll.
             </p>
         </div>

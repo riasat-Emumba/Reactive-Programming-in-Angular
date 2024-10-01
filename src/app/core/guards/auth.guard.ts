@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     router.navigate([PATHS.LOGIN])
     return false;
   }
-  else if (isAdmin && route.routeConfig?.path !== PATHS.HOME) {
+  else if (!isAdmin && route.routeConfig?.path !== PATHS.HOME) {
     router.navigate([PATHS.SLACH])
     return false;
   }

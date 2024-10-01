@@ -1,6 +1,7 @@
-<h3 class="mb-0"><strong>Merge Map</strong></h3>
-<p>Flattening Operator. It gets the stream and converts it to data. It is a coombination of map + megeAll </p>
-
+<app-operators-intro>
+    <p heading>Merge Map</p>
+    Flattening Operator. It gets the stream and converts it to data. It is a coombination of map + megeAll
+</app-operators-intro>
 
 <div class="row">
     <div class="col-md-4">
@@ -11,7 +12,7 @@
         </p>
         <hr>
         <ul *ngFor="let user of userListWithMap">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
 
     </div>
@@ -23,7 +24,7 @@
         </p>
         <hr>
         <ul *ngFor="let user of userListWithMapAndMergeAll">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
 
     </div>
@@ -35,7 +36,7 @@
         </p>
         <hr>
         <ul *ngFor="let user of userListWithMergeMap">
-            <li>{{user.name  ?? user.firstname }}</li>
+            <li>{{user.name ?? user.firstname }}</li>
         </ul>
 
     </div>
