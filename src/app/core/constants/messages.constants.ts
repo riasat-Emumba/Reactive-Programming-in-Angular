@@ -1,5 +1,5 @@
 // Messages
-export const MESSAGES: { [key: string]: string } = {
+export const MESSAGES = {
     WELCOME: 'Welcome',
     PROJECT_NAME: 'Async Architecture',
     INVALID_USERNAME_OR_PASSWORD: 'Invalid username or password',

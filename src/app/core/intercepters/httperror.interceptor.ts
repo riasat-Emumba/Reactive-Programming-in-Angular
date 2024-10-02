@@ -13,35 +13,35 @@ export class HttperrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
 
-        let errorMessage: string = MESSAGES['SOMETHING_WENT_WRONG'];
+        let errorMessage: string = MESSAGES.SOMETHING_WENT_WRONG;
 
         if (error.error instanceof ErrorEvent) {
           // Client-side or network error
-          errorMessage = MESSAGES['NETWORK_ERROR'];
+          errorMessage = MESSAGES.NETWORK_ERROR
         } else {
           // Server-side error
           switch (error.status) {
             case 0:
               // If status code is 0, it indicates no response from server (network issue or server down)
-              errorMessage = MESSAGES['SERVER_UNREACHABLE'];
+              errorMessage = MESSAGES.SERVER_UNREACHABLE
               break;
             case 400:
-              errorMessage = MESSAGES['BAD_REQUEST'];
+              errorMessage = MESSAGES.BAD_REQUEST
               break;
             case 401:
-              errorMessage = MESSAGES['UNAUTHORIZED'];
+              errorMessage = MESSAGES.UNAUTHORIZED
               break;
             case 403:
-              errorMessage = MESSAGES['ACCESS_DENIED'];
+              errorMessage = MESSAGES.ACCESS_DENIED
               break;
             case 404:
-              errorMessage = MESSAGES['RESOURCE_NOT_FOUND'];
+              errorMessage = MESSAGES.RESOURCE_NOT_FOUND
               break;
             case 500:
-              errorMessage = MESSAGES['INTERNAL_SERVER_ERROR']
+              errorMessage = MESSAGES.INTERNAL_SERVER_ERROR
               break;
             default:
-              errorMessage = MESSAGES['SERVER_ERROR'].replace('{status}', error.status.toString());
+              errorMessage = MESSAGES.SERVER_ERROR.replace('{status}', error.status.toString());
           }
         }
 
