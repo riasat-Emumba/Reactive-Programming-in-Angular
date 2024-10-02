@@ -1,0 +1,14 @@
+<div *ngIf="superUser" class="user-details">
+    <div class="row mb-1">
+        <div class="col-md-4"><strong>User ID:</strong></div>
+        <div class="col-md-8 text-end">{{ superUser.id }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="superUser.name">
+        <div class="col-md-4"><strong>Name:</strong></div>
+        <div class="col-md-8 text-end">{{ superUser.name }}</div>
+    </div>
+    <div class="row mb-1" *ngIf="superUser.gender">
+        <div class="col-md-4"><strong>Gender:</strong></div>
+        <div class="col-md-8 text-end">{{ superUser.gender }}</div>
+    </div>
+</div>

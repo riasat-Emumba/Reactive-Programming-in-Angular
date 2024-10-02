@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable, Observer, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-custom-observable',
@@ -13,7 +13,7 @@ export class CustomObservableComponent implements OnInit {
   public itemList: number[] = [];
   public menuItems: string[] = [];
   private subscriptions: Subscription = new Subscription();
-  
+
   constructor() {
     this.createDataObservable();
   }
@@ -34,36 +34,36 @@ export class CustomObservableComponent implements OnInit {
       observer.next(Math.random()); // Unique value for each subscriber
       observer.complete();
     });
-  
+
     // Subscription 1
     cold$.subscribe((value) => {
-      console.log('Cold Observable - Subscription 1:', value); 
+      console.log('Cold Observable - Subscription 1:', value);
     });
-  
+
     // Subscription 2
     cold$.subscribe((value) => {
-      console.log('Cold Observable - Subscription 2:', value); 
+      console.log('Cold Observable - Subscription 2:', value);
     });
   }
-  
+
   generateHotObservable() {
     const sharedValue = Math.random(); // Shared value across all subscribers
     const hot$ = new Observable<number>((observer) => {
       observer.next(sharedValue); // Same value for all subscribers
       observer.complete();
     });
-  
+
     // Subscription 1
     hot$.subscribe((value) => {
-      console.log('Hot Observable - Subscription 1:', value); 
+      console.log('Hot Observable - Subscription 1:', value);
     });
-  
+
     // Subscription 2
     hot$.subscribe((value) => {
-      console.log('Hot Observable - Subscription 2:', value);   
+      console.log('Hot Observable - Subscription 2:', value);
     });
   }
-  
+
   private createDataObservable(): void {
     this.dataObservable$ = new Observable<number>(observer => {
       for (let i = 0; i <= 100; i += 10) {
@@ -72,7 +72,7 @@ export class CustomObservableComponent implements OnInit {
       observer.complete();
     });
   }
-  
+
   private subscribeToData(): void {
     this.dataObservable$.subscribe({
       next: (value) => {
@@ -87,14 +87,14 @@ export class CustomObservableComponent implements OnInit {
       }
     });
   }
-  
+
   private createMenuObservable(): void {
     this.menuObservable$ = new Observable<string[]>(observer => {
       const menuList = ['Burger', 'Pasta'];
       observer.next(menuList);
       observer.complete();
     });
-  
+
     this.menuObservable$.subscribe({
       next: (items) => {
         this.menuItems = items;
@@ -108,6 +108,6 @@ export class CustomObservableComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
 }

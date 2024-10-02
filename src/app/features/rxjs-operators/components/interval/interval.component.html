@@ -8,9 +8,7 @@
         <div class="card">
             <div class="card-header">Uploading Videos</div>
             <div class="card-body">
-                <ul *ngFor="let video of videoList">
-                    <li>{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoList"></app-data-list>
             </div>
         </div>
     </div>

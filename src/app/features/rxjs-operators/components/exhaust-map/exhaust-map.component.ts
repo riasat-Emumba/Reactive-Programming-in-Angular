@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { concatMap, delay, exhaustMap, from, fromEvent, interval, mergeMap, of, Subscription, switchMap, take } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { delay, exhaustMap, from, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-exhaust-map',
@@ -9,7 +9,7 @@ import { concatMap, delay, exhaustMap, from, fromEvent, interval, mergeMap, of, 
 export class ExhaustMapComponent implements OnInit {
 
   private subscriptions = new Subscription();
-  currentValue:any = 0;
+  currentValue: any = 0;
 
   ngOnInit(): void {
     this.subscriptions.add(this.example(exhaustMap)());
@@ -25,14 +25,14 @@ export class ExhaustMapComponent implements OnInit {
     from([0, 1, 2, 3, 4,])
       .pipe(operator((x: any) => of(x).pipe(delay(1000))))
       .subscribe(data => {
-        console.log(operator,data);
+        console.log(operator, data);
         this.currentValue = data;
       })
-      // .subscribe(
-      //   console.log,
-      //   (val) => { this.currentValue = val  },
-      //   () => console.log(`${operator.name} complete`)
-      // );
+    // .subscribe(
+    //   console.log,
+    //   (val) => { this.currentValue = val  },
+    //   () => console.log(`${operator.name} complete`)
+    // );
   }
 
 

@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable, fromEvent, pluck, map, catchError, withLatestFrom, combineLatest, zip, forkJoin, take } from 'rxjs';
+import { Observable, fromEvent, pluck, map, catchError, zip, forkJoin, } from 'rxjs';
 
 @Component({
   selector: 'app-zip',
   templateUrl: './zip.component.html',
   styleUrls: ['./zip.component.scss']
 })
+
 export class ZipComponent {
 
   // nameOptions = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { delay, from, map, mergeAll, mergeMap, Observable } from 'rxjs';
-import { USER_ROLES, UserRole } from 'src/app/core/constants/constants';
 import { ApiService } from '../../services/api.service';
+import { USER_ROLES } from 'src/app/core/constants/categories.constants';
+import { UserRole } from 'src/app/core/constants/user.constants';
 
 @Component({
   selector: 'app-merge-map',
@@ -9,15 +10,17 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./merge-map.component.scss'],
 })
 export class MergeMapComponent implements OnInit {
+
   userListWithMap: any[] = [];
   userListWithMapAndMergeAll: any[] = [];
   userListWithMergeMap: any[] = [];
+  userRoles = USER_ROLES;
 
-  constructor(private apiService: ApiService) {}
-  
+  constructor(private apiService: ApiService) { }
+
   ngOnInit(): void {
-    // this.fetchUsersWithMap();
-    // this.fetchUsersWithMapAndMergeAll();
+    this.fetchUsersWithMap();
+    this.fetchUsersWithMapAndMergeAll();
     this.fetchUsersWithMergeMap();
   }
 
@@ -26,7 +29,8 @@ export class MergeMapComponent implements OnInit {
       .pipe(map((userType) => this.getUsersByUserType(userType)))
       .subscribe((userObservable) => {
         userObservable.subscribe((userData) => {
-          console.log(userData);
+          // console.log(userData);
+          this.userListWithMap.push(...userData);
         });
       });
   }
@@ -39,6 +43,7 @@ export class MergeMapComponent implements OnInit {
       )
       .subscribe((userData) => {
         console.log(userData);
+        this.userListWithMapAndMergeAll.push(...userData);
       });
   }
 
@@ -48,7 +53,7 @@ export class MergeMapComponent implements OnInit {
         mergeMap((userType) => this.getUsersByUserType(userType))
       )
       .subscribe((userData) => {
-        console.log(userData);
+        // console.log(userData);
         this.userListWithMergeMap.push(...userData);
       });
   }

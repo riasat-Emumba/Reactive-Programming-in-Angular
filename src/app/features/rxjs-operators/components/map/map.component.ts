@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { IUser } from '../../models/iuser';
-import { UserRole } from 'src/app/core/constants/constants';
 import { ApiService } from '../../services/api.service';
 import { ITransformedUser } from '../../models/itransformed-user';
+import { UserRole } from 'src/app/core/constants/user.constants';
 
 @Component({
   selector: 'app-map',
@@ -15,10 +15,10 @@ export class MapComponent implements OnInit {
   public originalUsers$!: Observable<IUser[]>;
   public transformedUsers$!: Observable<ITransformedUser[]>;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.loadUserData(); 
+    this.loadUserData();
   }
 
   private loadUserData(): void {

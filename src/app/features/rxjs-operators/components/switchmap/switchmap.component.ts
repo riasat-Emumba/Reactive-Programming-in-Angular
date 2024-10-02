@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { from, map, mergeMap, concatMap, Observable, delay, of, switchAll, switchMap, Subscription } from 'rxjs';
-import { VideoCategory } from 'src/app/core/constants/constants';
+import { from, map, Observable, delay, of, switchAll, switchMap, Subscription } from 'rxjs';
+import { VIDEO_CATEGORIES } from 'src/app/core/constants/categories.constants';
 
 @Component({
   selector: 'app-switchmap',
@@ -13,7 +13,7 @@ export class SwitchmapComponent implements OnInit {
   videoListForSwitchAll: string[] = [];
   videoListForSwitchMap: string[] = [];
   private subscription = new Subscription();
-  
+  categories = VIDEO_CATEGORIES
   constructor() { }
 
   ngOnInit(): void {
@@ -25,8 +25,8 @@ export class SwitchmapComponent implements OnInit {
 
   // Example using map operator
   loadVideosUsingMap(): void {
-    const source = from(Object.values(VideoCategory));
-  source.pipe(
+    const source = from(Object.values(VIDEO_CATEGORIES));
+    source.pipe(
       map(channelGenre => this.getDataByChannelName(channelGenre))
     ).subscribe(data$ => {
       data$.subscribe(newData => {
@@ -37,7 +37,7 @@ export class SwitchmapComponent implements OnInit {
 
   // Example using SwitchAll operator
   loadVideosMapAndSwitchALL(): void {
-    const source = from(Object.values(VideoCategory));
+    const source = from(Object.values(VIDEO_CATEGORIES));
     source.pipe(
       map(channelGenre => this.getDataByChannelName(channelGenre)),
       switchAll()
@@ -48,12 +48,12 @@ export class SwitchmapComponent implements OnInit {
 
   // Example using SwitchMap operator
   loadVideosUsingSwitchMap(): void {
-    const source = from(Object.values(VideoCategory));
+    const source = from(Object.values(VIDEO_CATEGORIES));
     this.subscription = source.pipe(
       switchMap(channelGenre => this.getDataByChannelName(channelGenre))
     ).subscribe(data => {
       console.log(data);
-      
+
       this.videoListForSwitchMap.push(data);
     });
   }

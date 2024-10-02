@@ -7,17 +7,17 @@
     <div class="col-md-4"><strong>Name:</strong></div>
     <div class="col-md-8 text-end">{{ user.fullName }}</div>
   </div>
-  <div class="row mb-1" *ngIf="user.firstname || user.lastname">
+  <div class="row mb-1" *ngIf="user.firstname">
     <div class="col-md-4"><strong>First Name:</strong></div>
     <div class="col-md-8 text-end">{{ user.firstname }}</div>
   </div>
-  <div class="row mb-1" *ngIf="user.firstname || user.lastname">
+  <div class="row mb-1" *ngIf="user.lastname">
     <div class="col-md-4"><strong>Last Name:</strong></div>
     <div class="col-md-8 text-end">{{ user.lastname }}</div>
   </div>
-  <div class="row mb-1">
+  <div class="row mb-1" *ngIf="user.membershipLevel ">
     <div class="col-md-4"><strong>Membership:</strong></div>
-    <div class="col-md-8 text-end">{{ user.membershiplevel || user.membershipLevel }}</div>
+    <div class="col-md-8 text-end">{{ user.membershiplevel }}</div>
   </div>
   <div class="row mb-1" *ngIf="user.discount">
     <div class="col-md-4"><strong>Discount:</strong></div>

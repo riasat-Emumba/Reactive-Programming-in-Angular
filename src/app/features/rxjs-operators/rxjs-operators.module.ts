@@ -21,7 +21,7 @@ import { MergeMapComponent } from './components/merge-map/merge-map.component';
 import { ConcatMapComponent } from './components/concat-map/concat-map.component';
 import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
 import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
 import { ShareReplyComponent } from './components/share-reply/share-reply.component';
@@ -29,6 +29,9 @@ import { CombineLatestComponent } from './components/combine-latest/combine-late
 import { ZipComponent } from './components/zip/zip.component';
 import { CatchErrorComponent } from './components/catch-error/catch-error.component';
 import { OperatorsIntroComponent } from './components/operators-intro/operators-intro.component';
+import { DataListComponent } from './components/data-list/data-list.component';
+import { SuperUserListComponent } from './components/super-user-list/super-user-list.component';
+import { PhotocardComponent } from './components/photocard/photocard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { OperatorsIntroComponent } from './components/operators-intro/operators-
     CombineLatestComponent,
     ZipComponent,
     CatchErrorComponent,
-    OperatorsIntroComponent
+    OperatorsIntroComponent,
+    DataListComponent,
+    SuperUserListComponent,
+    PhotocardComponent,
   ],
   imports: [
     CommonModule,

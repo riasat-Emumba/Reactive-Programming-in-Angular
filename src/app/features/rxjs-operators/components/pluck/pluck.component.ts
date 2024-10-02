@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../models/iuser';
-import { firstValueFrom, flatMap, map, Observable, pluck, tap } from 'rxjs';
+import { firstValueFrom, flatMap, Observable, pluck, } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -10,16 +10,17 @@ import { ApiService } from '../../services/api.service';
 })
 export class PluckComponent implements OnInit {
 
-  userObservable$! : Observable<IUser[]>;
+  userObservable$!: Observable<IUser[]>;
   users: IUser[] = [];
-  userNames : string[] = [];
-  constructor(private apiService: ApiService){
+  userNames: string[] = [];
+
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
     this.getUserObjects();
     this.getUsersAsPromise();
-    // this.fetchUsersAsPromise();
+    this.fetchUsersAsPromise();
   }
 
   getUsersAsPromise() {
@@ -28,16 +29,16 @@ export class PluckComponent implements OnInit {
       this.users = value;
     }).catch((error) => {
       console.error('Error fetching users:', error);
-    } );
+    });
   }
 
   async fetchUsersAsPromise() {
     try {
       const users = await firstValueFrom(this.apiService.getUsers());
-      console.log(users); 
+      console.log(users);
       this.users = users;
     } catch (error) {
-      console.error('Error fetching users:', error); 
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -48,8 +49,8 @@ export class PluckComponent implements OnInit {
       flatMap((users) => {
         // console.log(users);
         return users.map((user) => {
-            return user;
-        })            
+          return user;
+        })
       }),
       pluck('firstname')
     ).subscribe((value: any) => {

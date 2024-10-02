@@ -1,10 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { MESSAGES, PATHS } from '../../constants/constants';
-import { NotificationService } from '../../services/notification.service';
 import { Subscription } from 'rxjs';
-import { MatCardLgImage } from '@angular/material/card';
+import { MESSAGES } from '../../constants/messages.constants';
+import { PATHS } from '../../constants/routes.constants';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +12,8 @@ import { MatCardLgImage } from '@angular/material/card';
 })
 export class HeaderComponent {
 
-  welcomeMsg = MESSAGES.WELCOME;
-  projectName = MESSAGES.PROJECT_NAME;
+  welcomeMsg = MESSAGES['WELCOME'];
+  projectName = MESSAGES['PROJECT_NAME'];
   isLoggedIn: boolean = false;
   private subscription!: Subscription;
 
@@ -39,29 +38,29 @@ export class HeaderComponent {
   }
 
   navigateToPromiseDashboard() {
-    this.router.navigate([PATHS.PROMISE_DASHBOARD]);
+    this.router.navigate([PATHS.DASHBOARDS.PROMISE]);
   }
 
   navigateToHome() {
-    this.router.navigate([PATHS.HOME]);
+    this.router.navigate([PATHS.AUTH.HOME]);
   }
 
   navigateToRxjsDashboard() {
-    this.router.navigate([PATHS.RXJS_DASHBOARD]);
+    this.router.navigate([PATHS.DASHBOARDS.RXJS]);
   }
 
   goBack() {
     const currentUrl = this.router.url;
     const urlSegments = currentUrl
-      .split(PATHS.SLACH)
+      .split(PATHS.SLASH)
       .filter((segment) => segment);
 
     if (urlSegments.length > 1) {
       urlSegments.pop();
-      const newUrl = PATHS.SLACH + urlSegments.join(PATHS.SLACH);
+      const newUrl = PATHS.SLASH + urlSegments.join(PATHS.SLASH);
       this.router.navigate([newUrl]);
     } else {
-      this.router.navigate([PATHS.HOME]);
+      this.router.navigate([PATHS.AUTH.HOME]);
     }
   }
 

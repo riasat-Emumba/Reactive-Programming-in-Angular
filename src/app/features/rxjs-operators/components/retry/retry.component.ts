@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { delay, retry, retryWhen, scan } from 'rxjs';
-import { IUser } from '../../models/iuser';
 import { IUsersDetail } from '../../models/iusers-detail';
-import { RETRY_LIMIT, USER_STATUS_MESSAGES } from 'src/app/core/constants/constants';
+import { USER_STATUS_MESSAGES } from 'src/app/core/constants/user.constants';
+import { RETRY_LIMIT } from 'src/app/core/constants/retry.constants';
 
 @Component({
   selector: 'app-retry',
@@ -14,8 +14,8 @@ export class RetryComponent implements OnInit {
 
   personObjRetry!: IUsersDetail;
   personRetryWhen!: IUsersDetail;
-  statusUsingRetry = USER_STATUS_MESSAGES.NO_DATA;
-  statusUsingRetryWhen = USER_STATUS_MESSAGES.NO_DATA;
+  statusUsingRetry: string = USER_STATUS_MESSAGES.NO_DATA;
+  statusUsingRetryWhen: string = USER_STATUS_MESSAGES.NO_DATA;
 
   constructor(private apiService: ApiService) { }
 

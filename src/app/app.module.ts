@@ -4,10 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
 import { HttperrorInterceptor } from './core/intercepters/httperror.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -18,11 +15,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSidenavModule,
-    CoreModule, 
-    HttpClientModule, 
-    MatIconModule,
-    MatMenuModule,
+    CoreModule,
+    HttpClientModule,
     MatSnackBarModule,
     BrowserAnimationsModule
   ],

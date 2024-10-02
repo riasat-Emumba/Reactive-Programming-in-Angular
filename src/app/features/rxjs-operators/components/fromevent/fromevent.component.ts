@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, Observable, Observer } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
 import { IWindowSize } from '../../models/iwindowsize';
 import { MessageStorageService } from '../../services/message-storage.service';
 
@@ -12,13 +12,13 @@ import { MessageStorageService } from '../../services/message-storage.service';
 export class FromEventComponent implements AfterViewInit {
 
   @ViewChild('addBtn') addBtn!: ElementRef;
-  
+
   public addBtn$!: Observable<Event>;
   public windowSize$: Observable<Event> = fromEvent(window, 'resize');
   public windowSizeObject: IWindowSize = { innerheight: 0, innerwidth: 0 };
   public videosList: string[] = [];
 
-  constructor(private messageStorageService: MessageStorageService) {}
+  constructor(private messageStorageService: MessageStorageService) { }
 
   ngAfterViewInit(): void {
     this.setupWindowResizeListener();
@@ -35,14 +35,14 @@ export class FromEventComponent implements AfterViewInit {
   private setupButtonClickListener(): void {
     let count = 1;
     this.addBtn$ = fromEvent(this.addBtn.nativeElement, 'click');
-    
+
     this.addBtn$.subscribe({
       next: () => {
         const videoCounter = `Video: ${count++}`;
         this.messageStorageService.addData(videoCounter, this.videosList);
         this.videosList = this.messageStorageService.getData();
         console.log('Videos List: ', this.videosList);
-        
+
       },
       error: (err) => console.error('Click event error: ', err)
     });

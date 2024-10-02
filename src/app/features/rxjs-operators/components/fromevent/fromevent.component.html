@@ -1,19 +1,28 @@
-<!-- <h3><strong>Observable Stream</strong></h3>
-<ul>
-    <li>User Input (Button click Event)</li>
-    <li>Http Request</li>
-    <li>Array</li>
-    <li>Object</li>
-</ul>
-<h3><strong>Observable Handle</strong></h3>
-<ul>
-    <li>Data</li>
-    <li>Error</li>
-    <li>Completeion</li>
-</ul>
-<p> Subscribe gives three methods namely <br> .subscribe((data) => console.log(data), <br>
-    (error) => console.log(error),<br>
-    () => console.log('Complete')) </p> -->
+<div class="container mt-4">
+    <h3 class="text-primary"><strong>Observable Stream</strong></h3>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">User Input (Button click Event)</li>
+        <li class="list-group-item">Http Request</li>
+        <li class="list-group-item">Array</li>
+        <li class="list-group-item">Object</li>
+    </ul>
+    <h3 class="text-primary"><strong>Observable Handle</strong></h3>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">Data</li>
+        <li class="list-group-item">Error</li>
+        <li class="list-group-item">Completion</li>
+    </ul>
+    <p class="text-secondary">Subscribe gives three methods namely:</p>
+    <pre class="bg-light p-3">
+            <code>
+    .subscribe(
+        (data) => console.log(data),
+        (error) => console.log(error),
+        () => console.log('Complete')
+    )
+            </code>
+        </pre>
+</div>
 
 
 
@@ -38,9 +47,7 @@
                 Video List
             </div>
             <div class="card-body">
-                <ul *ngFor="let videoCount of videosList">
-                    <li> {{videoCount}} </li>
-                </ul>
+                <app-data-list [dataList]="videosList"></app-data-list>
             </div>
         </div>
     </div>

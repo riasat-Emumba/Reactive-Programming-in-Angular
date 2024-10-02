@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { from, map, concatMap, delay, mergeMap, of, switchMap, Subject, takeUntil } from 'rxjs';
+import { map, concatMap, delay, mergeMap, switchMap, takeUntil } from 'rxjs/operators';
+import { from, of, Subject } from 'rxjs';
 import { ApiService } from '../../services/api.service';
-import { CATEGORIES } from 'src/app/core/constants/constants';
+import { COMMON_CATEGORIES } from 'src/app/core/constants/categories.constants';
 
 @Component({
   selector: 'app-compare-maps',
@@ -16,7 +17,7 @@ export class CompareMapsComponent {
   videoListForMergeMap: string[] = [];
   videoListForConcatMap: string[] = [];
   videoListForSwitchMap: string[] = [];
-  private channelSource: string[] = CATEGORIES;
+  channelSource: string[] = COMMON_CATEGORIES;
 
   constructor(private apiService: ApiService) { }
 

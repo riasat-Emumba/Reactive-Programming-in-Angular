@@ -1,50 +1,38 @@
 <div class="container mt-4">
-
-    <!-- First Card: Photos with ID 1-10 -->
-    <div class="row">
-        <div class="col-md-4" *ngFor="let photo of first3Photos$ | async">
-            <h2 class="mb-4">{{photo.id}}</h2>
-            <div class="card mb-4 shadow-sm">
-                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{photo.title}}</h5>
-                    <p class="card-text">{{photo.description}}</p>
-                </div>
+    <!-- First Card: Photos with ID 1-3 -->
+    <ng-template #loader>
+        <div class="text-center mt-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
+            <p class="mt-2">Loading.</p>
+        </div>
+    </ng-template>
+
+    <div class="row" *ngIf="first3Photos$ | async as first3Photos; else loader">
+        <div class="col-md-4" *ngFor="let photo of first3Photos">
+            <app-photocard [photo]="photo"></app-photocard>
         </div>
     </div>
 
-    <!-- Second Card: Photos with ID 11-20 -->
-    <div class="row">
-        <div class="col-md-4" *ngFor="let photo of last3Photos$ | async">
-            <h2 class="mb-4">{{photo.id}}</h2>
-            <div class="card mb-4 shadow-sm">
-                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{photo.title}}</h5>
-                    <p class="card-text">{{photo.description}}</p>
-                </div>
-            </div>
+    <div class="row" *ngIf="last3Photos$ | async as last3Photos; else loader">
+        <div class="col-md-4" *ngFor="let photo of last3Photos">
+            <app-photocard [photo]="photo"></app-photocard>
         </div>
     </div>
 
     <!-- Third Card: All Photos -->
-    <div class="row">
-        <div class="col-md-4" *ngFor="let photo of allPhotos$ | async">
-            <h2 class="mb-4">{{photo.id}}</h2>
-            <div class="card mb-4 shadow-sm">
-                <img [src]="photo.url" class="card-img-top" alt="{{photo.title}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{photo.title}}</h5>
-                    <p class="card-text">{{photo.description}}</p>
-                </div>
-            </div>
+    <div class="row" *ngIf="allPhotos$ | async as allPhotos; else loader">
+        <div class="col-md-4" *ngFor="let photo of allPhotos ">
+            <app-photocard [photo]="photo"></app-photocard>
         </div>
     </div>
 </div>
 <div class="mt-5 p-4 bg-light rounded">
     <h3 class="text-primary">Conclusion</h3>
     <p class="lead text-muted">
-        Initially, my API was being hit multiple times due to the repeated use of the observable. However, by using the <code>shareReplay</code> operator, the API is now hit only once. Subsequent data fetching does not involve any additional network requests, leading to improved performance and reduced load on the server.
+        Initially, my API was being hit multiple times due to the repeated use of the observable. However, by using the
+        <code>shareReplay</code> operator, the API is now hit only once. Subsequent data fetching does not involve any
+        additional network requests, leading to improved performance and reduced load on the server.
     </p>
 </div>

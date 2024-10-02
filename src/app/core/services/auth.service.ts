@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LOGIN_STATUS_KEY, USER_CREDENTIALS } from '../constants/constants';
+import { LOGIN_STATUS_KEY, USER_CREDENTIALS } from '../constants/user.constants';
+
 
 @Injectable({
   providedIn: 'root'

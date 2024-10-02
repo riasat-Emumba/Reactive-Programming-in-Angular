@@ -15,12 +15,10 @@
             </div>
             <div class="card-body">
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                    <strong>Videos</strong>: {{categories}}
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForMap">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForMap"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-primary">Map transforms each value emitted by the source
@@ -38,12 +36,10 @@
             </div>
             <div class="card-body">
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                    <strong>Videos</strong>: {{categories}}
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForSwitchAll">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForSwitchAll"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-danger">SwitchAll cancels previous observables and only
@@ -61,12 +57,10 @@
             </div>
             <div class="card-body">
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                    <strong>Videos</strong>: {{categories}}
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForSwitchMap">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForSwitchMap"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-success">SwitchMap cancels previous observables and only

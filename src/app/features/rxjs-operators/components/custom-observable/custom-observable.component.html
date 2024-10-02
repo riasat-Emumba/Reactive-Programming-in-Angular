@@ -12,9 +12,7 @@
                     <h5 class="mb-0">Stock</h5>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled">
-                        <li *ngFor="let itemCount of itemList">{{ itemCount }}</li>
-                    </ul>
+                    <app-data-list [dataList]="itemList"></app-data-list>
                 </div>
             </div>
         </div>
@@ -25,10 +23,8 @@
                 <div class="card-header">
                     <h5 class="mb-0">Menu List</h5>
                 </div>
-                <div class="card-body">
-                    <ul class="list-unstyled" *ngIf="menuObservable$ | async as menuObservable">
-                        <li *ngFor="let menu of menuObservable">{{ menu }}</li>
-                    </ul>
+                <div class="card-body" *ngIf="menuObservable$ | async as menuObservable">
+                    <app-data-list [dataList]="menuObservable"></app-data-list>
                 </div>
             </div>
         </div>

@@ -1,42 +1,50 @@
 <app-operators-intro>
   <p heading>Pluck operator</p>
-  We can pluck the required information or a property from an object.
+  <p>We can pluck the required information or a property from an object.</p>
 </app-operators-intro>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        User's Data
-      </div>
-      <div class="card-body">
-        <ul *ngFor="let data of users">
-          <li>{{data.firstname}}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        User's Data
-      </div>
-      <div class="card-body">
-        <ul *ngFor="let data of users">
-          <li>{{data.firstname}}</li>
-        </ul>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-primary text-white">
+          User's Data
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let data of users">
+              {{data.firstname}}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6 mt-2">
-    <div class="card">
-      <div class="card-header">
-        User's Data
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-primary text-white">
+          User's Data
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let data of users">
+              {{data.firstname}}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="card-body">
-        <ul *ngFor="let data of userNames">
-          <li>{{data}}</li>
-        </ul>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-primary text-white">
+          User's Data
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let data of userNames">
+              {{data}}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

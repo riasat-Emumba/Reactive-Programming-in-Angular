@@ -1,6 +1,6 @@
 <h3 class="mb-1"><b>Merge operator</b></h3>
-<p>It adds streams together. It doesnot wait for first stream to get finished and so on, 
-    it adds immediately to the final array and combine all  stream in a same way.</p>
+<p>It adds streams together. It doesnot wait for first stream to get finished and so on,
+    it adds immediately to the final array and combine all stream in a same way.</p>
 <div class="row">
     <div class="col-md-4">
         <strong>Source -01 | Tech Channle(5)</strong>
@@ -32,9 +32,7 @@
             <div class="card">
                 <div class="card-header"> Your Channel (Subscriber)</div>
                 <div class="card-body">
-                    <ul *ngFor="let data of finalStreamData">
-                        <li>{{data}}</li>
-                    </ul>
+                    <app-data-list [dataList]="finalStreamData"></app-data-list>
                 </div>
             </div>
         </div>

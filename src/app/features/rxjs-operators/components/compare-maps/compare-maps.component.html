@@ -1,11 +1,11 @@
 <app-operators-intro>
     <p heading>Comparison of Map Operators</p>
-    <p>Map, MergeMap, and concatMap</p>
+    <p>Map, MergeMap, ConcatMap, and SwitchMap</p>
 </app-operators-intro>
 <div class="row">
     <!-- Example 01: Map -->
     <!-- <div class="col-md-4 mb-4">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
                 <strong>Example 01 | Map</strong>
             </div>
@@ -27,18 +27,16 @@
 
     <!-- Example 02: MergeMap -->
     <div class="col-md-4 mb-4">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header bg-danger text-white">
                 <strong>Example 02 | MergeMap</strong>
             </div>
             <div class="card-body">
                 <p class="bg-light py-2 px-3 border rounded">
-                    <strong>Videos</strong>: ["Tech", "Comedy", "News"]
+                    <strong>Videos</strong>: {{channelSource}}
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForMergeMap">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForMergeMap"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-danger">MergeMap does not preserve the order of
@@ -59,9 +57,7 @@
                     <strong>Videos</strong>: ["Tech", "Comedy", "News"]
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForConcatMap">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForConcatMap"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-success">ConcatMap preserves the order of
@@ -82,9 +78,7 @@
                     <strong>Videos</strong>: ["Tech", "Comedy", "News"]
                 </p>
                 <hr>
-                <ul class="list-group list-group-flush" *ngFor="let video of videoListForSwitchMap">
-                    <li class="list-group-item">{{video}}</li>
-                </ul>
+                <app-data-list [dataList]="videoListForSwitchMap"></app-data-list>
                 <hr>
                 <p class="bg-light py-2 px-3 border rounded">
                     <strong>Result</strong>: <span class="text-dark">SwitchMap switches to a new observable on each

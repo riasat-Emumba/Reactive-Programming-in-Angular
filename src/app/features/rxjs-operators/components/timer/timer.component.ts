@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, Subscription, takeUntil, timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 import { MessageStorageService } from '../../services/message-storage.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { MessageStorageService } from '../../services/message-storage.service';
 })
 export class TimerComponent implements OnInit {
 
-  private broadCastSubscription!: Subscription;
-  private onDestroy$=  new Subject<void>();
+  private onDestroy$ = new Subject<void>();
   broadCastedVideoList: string[] = [];
   totalPublishedVideos: number = 0;
 
@@ -22,14 +21,14 @@ export class TimerComponent implements OnInit {
 
   startVideoBroadCast() {
     const broadCastVideos$ = timer(1000, 3000);
-    this.broadCastSubscription = broadCastVideos$.pipe(
+    broadCastVideos$.pipe(
       takeUntil(this.onDestroy$),
     ).subscribe((data) => {
       let msgFromObservable = 'Video ' + ++data;
       console.log(msgFromObservable);
-      
       this.totalPublishedVideos = data;
       this.messageStorageService.addData(msgFromObservable, this.broadCastedVideoList)
+      this.broadCastedVideoList = this.messageStorageService.getData();
       // Used to stop emitting more data after below condition is true
       // if (data >= 5) {
       //   this.broadCastSubscription.unsubscribe();

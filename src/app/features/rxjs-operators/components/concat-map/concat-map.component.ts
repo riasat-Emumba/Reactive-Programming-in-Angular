@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { concatAll, concatMap, delay, from, isObservable, map, mergeAll, mergeMap, Observable, tap, toArray } from 'rxjs';
-import { USER_ROLES, UserRole } from 'src/app/core/constants/constants';
+import { concatAll, concatMap, delay, from, map, Observable } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { IUser } from '../../models/iuser';
+import { USER_ROLES } from 'src/app/core/constants/categories.constants';
+import { UserRole } from 'src/app/core/constants/user.constants';
 
 @Component({
   selector: 'app-concat-map',
@@ -14,6 +15,7 @@ export class ConcatMapComponent {
   userListForMap: IUser[] = [];
   userListForMapAndConcatAll: any[] = [];
   userListForConcatMap: any[] = [];
+  users: string[] = USER_ROLES;
 
   constructor(private apiService: ApiService) { }
 

@@ -14,7 +14,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentComponent } from './components/content/content.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -25,20 +25,20 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ErrorSnackbarComponent
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCheckboxModule,
-    MatInputModule, 
+    MatInputModule,
     MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
     ReactiveFormsModule,
   ],
   exports: [
-    HeaderComponent, 
-    FooterComponent, 
+    HeaderComponent,
+    FooterComponent,
   ]
 })
 export class CoreModule { }
