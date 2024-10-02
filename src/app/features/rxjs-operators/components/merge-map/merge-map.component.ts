@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, from, map, mergeAll, mergeMap, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { delay, map, mergeAll, mergeMap } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { USER_ROLES } from 'src/app/core/constants/categories.constants';
 import { UserRole } from 'src/app/core/constants/user.constants';

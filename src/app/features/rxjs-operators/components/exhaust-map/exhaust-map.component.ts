@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, exhaustMap, from, of, Subscription } from 'rxjs';
+import { from, of, Subscription } from 'rxjs';
+import { delay, exhaustMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-exhaust-map',

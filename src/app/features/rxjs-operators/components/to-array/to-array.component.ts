@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Subject, Subscription, take, takeUntil, toArray } from 'rxjs';
+import { interval, Subject, take, takeUntil, toArray } from 'rxjs';
+
 
 @Component({
   selector: 'app-to-array',

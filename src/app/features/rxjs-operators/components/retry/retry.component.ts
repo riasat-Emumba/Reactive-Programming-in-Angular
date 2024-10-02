@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { delay, retry, retryWhen, scan } from 'rxjs';
+import { delay, retry, retryWhen, scan } from 'rxjs/operators';
 import { IUsersDetail } from '../../models/iusers-detail';
 import { USER_STATUS_MESSAGES } from 'src/app/core/constants/user.constants';
 import { RETRY_LIMIT } from 'src/app/core/constants/retry.constants';

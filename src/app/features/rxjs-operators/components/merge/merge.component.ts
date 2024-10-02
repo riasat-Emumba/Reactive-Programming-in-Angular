@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, map, merge, Observable, Subscription, take } from 'rxjs';
+import { interval, merge, Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-merge',
@@ -7,7 +9,7 @@ import { interval, map, merge, Observable, Subscription, take } from 'rxjs';
   styleUrls: ['./merge.component.scss']
 })
 export class MergeComponent implements OnInit {
-  
+
   finalStreamData: string[] = [];
   private subscription: Subscription = new Subscription();
 
@@ -39,9 +41,9 @@ export class MergeComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe(); 
+    this.subscription.unsubscribe();
   }
-  
+
 }
-  
+
 

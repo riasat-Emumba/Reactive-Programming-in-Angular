@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../models/iuser';
-import { firstValueFrom, flatMap, Observable, pluck, } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
+import { flatMap, pluck } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 
 @Component({

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { concatAll, concatMap, delay, from, map, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { concatAll, concatMap, delay, map } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { IUser } from '../../models/iuser';
 import { USER_ROLES } from 'src/app/core/constants/categories.constants';

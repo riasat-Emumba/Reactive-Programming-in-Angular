@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { catchError, combineLatest, fromEvent, map, Observable, pluck, withLatestFrom } from 'rxjs';
+import { combineLatest, fromEvent, Observable } from 'rxjs';
+import { catchError, map, pluck, withLatestFrom } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-combine-latest',

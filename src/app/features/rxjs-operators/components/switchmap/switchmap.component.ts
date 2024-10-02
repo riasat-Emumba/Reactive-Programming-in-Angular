@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { from, map, Observable, delay, of, switchAll, switchMap, Subscription } from 'rxjs';
+import { from, of, Observable, Subscription } from 'rxjs';
+import { map, delay, switchAll, switchMap } from 'rxjs/operators';
 import { VIDEO_CATEGORIES } from 'src/app/core/constants/categories.constants';
 
 @Component({
