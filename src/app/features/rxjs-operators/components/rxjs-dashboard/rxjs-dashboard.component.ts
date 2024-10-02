@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PATHS, RXJS_ROUTES } from 'src/app/core/constants/routes.constants';
 import { IOperator } from 'src/app/shared/model/ioperator';
 
 @Component({
@@ -7,7 +8,7 @@ import { IOperator } from 'src/app/shared/model/ioperator';
   styleUrls: ['./rxjs-dashboard.component.scss']
 })
 export class RxjsDashboardComponent implements OnInit {
-  
+
   operators: IOperator[] = [];
 
   ngOnInit(): void {
@@ -16,29 +17,29 @@ export class RxjsDashboardComponent implements OnInit {
 
   private initializeOperators(): void {
     this.operators = [
-      { name: 'Of-from', link: '/rxjs-dashboard/of-from' },
-      { name: 'FromEvent', link: '/rxjs-dashboard/fromevent' },
-      { name: 'Timer', link: '/rxjs-dashboard/timer' },
-      { name: 'Interval', link: '/rxjs-dashboard/interval' },
-      { name: 'Custom-observable', link: '/rxjs-dashboard/custom-observable' },
-      { name: 'To-array', link: '/rxjs-dashboard/to-array' },
-      { name: 'Map', link: '/rxjs-dashboard/map' },
-      { name: 'ConcatMap', link: '/rxjs-dashboard/concat-map' },
-      { name: 'SwitchMap', link: '/rxjs-dashboard/switchmap' },
-      { name: 'MergeMap', link: '/rxjs-dashboard/merge-map' },
-      { name: 'ExhaustMap', link: '/rxjs-dashboard/exhaust-map' },
-      { name: 'Pluck', link: '/rxjs-dashboard/pluck' },
-      { name: 'Filter', link: '/rxjs-dashboard/filter' },
-      { name: 'Retry', link: '/rxjs-dashboard/retry' },
-      { name: 'Concat', link: '/rxjs-dashboard/concat' },
-      { name: 'Merge', link: '/rxjs-dashboard/merge' },
-      { name: 'Compare Maps', link: '/rxjs-dashboard/compare-maps' },
-      { name: 'DebounceTime', link: '/rxjs-dashboard/debounce-time' },
-      { name: 'Map Practical Examples', link: '/rxjs-dashboard/map-in-action' },
-      { name: 'Share-Reply', link: '/rxjs-dashboard/share-reply' },
-      { name: 'Combine Latest', link: '/rxjs-dashboard/combine-latest' },
-      { name: 'Zip & ForkJoin', link: '/rxjs-dashboard/zip-fork-join' },
-      { name: 'CatchError', link: '/rxjs-dashboard/catch-error' },
+      { name: RXJS_ROUTES.OF_FROM, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.OF_FROM },
+      { name: RXJS_ROUTES.FROM_EVENT, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.FROM_EVENT },
+      { name: RXJS_ROUTES.TIMER, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.TIMER },
+      { name: RXJS_ROUTES.INTERVAL, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.INTERVAL },
+      { name: RXJS_ROUTES.CUSTOM_OBSERVABLE, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.CUSTOM_OBSERVABLE },
+      { name: RXJS_ROUTES.TO_ARRAY, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.TO_ARRAY },
+      { name: RXJS_ROUTES.MAP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.MAP },
+      { name: RXJS_ROUTES.CONCAT_MAP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.CONCAT_MAP },
+      { name: RXJS_ROUTES.SWITCH_MAP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.SWITCH_MAP },
+      { name: RXJS_ROUTES.MERGE_MAP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.MERGE_MAP },
+      { name: RXJS_ROUTES.EXHAUST_MAP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.EXHAUST_MAP },
+      { name: RXJS_ROUTES.PLUCK, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.PLUCK },
+      { name: RXJS_ROUTES.FILTER, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.FILTER },
+      { name: RXJS_ROUTES.RETRY, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.RETRY },
+      { name: RXJS_ROUTES.CONCAT, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.CONCAT },
+      { name: RXJS_ROUTES.MERGE, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.MERGE },
+      { name: RXJS_ROUTES.COMPARE_MAPS, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.COMPARE_MAPS },
+      { name: RXJS_ROUTES.DEBOUNCE_TIME, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.DEBOUNCE_TIME },
+      { name: RXJS_ROUTES.MAPS_IN_ACTION, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.MAPS_IN_ACTION },
+      { name: RXJS_ROUTES.SHARE_REPLY, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.SHARE_REPLY },
+      { name: RXJS_ROUTES.COMBINE_LATEST, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.COMBINE_LATEST },
+      { name: RXJS_ROUTES.ZIP, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.ZIP },
+      { name: RXJS_ROUTES.CATCH_ERROR, link: PATHS.SLASH + PATHS.DASHBOARDS.RXJS + PATHS.SLASH + RXJS_ROUTES.CATCH_ERROR },
       // Add more operators as needed
     ];
   }

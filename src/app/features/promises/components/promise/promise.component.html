@@ -1,27 +1,29 @@
-<h4><b>Promise vs Observables</b></h4>
-<h4><b>Differences</b></h4>
-<p>Promise</p>
-<ul>
-    <li>Async</li>
-    <li>Return Single Value
-        <ol>
-            <li>resolve(Yes)</li>
-            <li>rejext(No)</li>
-        </ol>
-    </li>
-</ul>
-<p>Observables</p>
-<ul>
-    <li>Async or sync </li>
-    <li>Return stream of values</li>
-</ul>
-<hr>
-<h4 class="mb-2"><b>Example 2</b></h4>
-<button class="mb-2" mat-flat-button color="primary" (click)="getAllUsers()">Get User Data</button>
-<p class="mb-2"><b>Result: </b> <span>{{promiseResultExample2}}</span>
-<p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample2}}</span>
+<div class="container mt-4">
+    <h4 class="font-weight-bold">Promise vs Observables</h4>
+    <h4 class="font-weight-bold">Differences</h4>
+    <p>Promise</p>
+    <ul class="list-group mb-3">
+        <li class="list-group-item">Async</li>
+        <li class="list-group-item">Return Single Value
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">resolve(Yes)</li>
+                <li class="list-group-item">reject(No)</li>
+            </ol>
+        </li>
+    </ul>
+    <p>Observables</p>
+    <ul class="list-group mb-3">
+        <li class="list-group-item">Async or sync</li>
+        <li class="list-group-item">Return stream of values</li>
+    </ul>
     <hr>
-<h4 class="mb-2"><b>Example 3</b></h4>
-<button class="mb-2" mat-flat-button color="primary" (click)="getError()">Get User Data</button>
-<p class="mb-2"><b>Result: </b> <span>{{promiseResultExample3}}</span>
-<p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample3}}</span>
+    <h4 class="mb-2 font-weight-bold">Example 2</h4>
+    <button class="btn btn-primary mb-2" (click)="getAllUsers()">Get User Data</button>
+    <p class="mb-2"><b>Result: </b> <span>{{promiseResultExample2}}</span></p>
+    <p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample2}}</span></p>
+    <hr>
+    <h4 class="mb-2 font-weight-bold">Example 3</h4>
+    <button class="btn btn-primary mb-2" (click)="getError()">Get User Data</button>
+    <p class="mb-2"><b>Result: </b> <span>{{promiseResultExample3}}</span></p>
+    <p class="mb-2"><b>Promise State: </b> <span>{{promiseStateExample3}}</span></p>
+</div>

@@ -1,34 +1,54 @@
-<h3><b>Async Await</b></h3>
-<p>For better understanding create a function and return some value from it. Like in my component I created a function and I am returning a string 
-<i>{{getRandomString()}}</i>. Now if we add <b>async</b> keyword before this function then this function will always return me a promise. </p>
-<i>{{getPromise()}}</i>
-<hr>
-<p><b>Await</b> is also a keyword which waits untill promise gets settled and then it executes code further line by line but till that time it stops the execution of code.</p>
+<h3 class="text-center my-4"><b>Async Await</b></h3>
+<div class="container">
+    <p class="lead">For better understanding, create a function and return some value from it. Like in my component, I
+        created a function
+        and I am returning a string
+        <i>{{getRandomString()}}</i>. Now if we add the <b>async</b> keyword before this function, then this function
+        will always
+        return a promise.
+    </p>
+    <p class="text-muted"><i>{{getPromise()}}</i></p>
+    <hr>
+    <p class="lead"><b>Await</b> is also a keyword which waits until the promise gets settled and then it executes code
+        further line by line,
+        but till that time it stops the execution of code.
+    </p>
 
-<!-- <div class="container">
-    <div class="my-3"> -->
-        <div class="row">
-            <div class="col-md-4">
-                <strong>Example 1 : Promise</strong>
-                <hr>
-                <button (click)="fetchDataWithPromise()"type="button" class="btn btn-primary">Buy Laptop</button>
-                <hr>
-                <div  #div1>Data</div>
-            </div>
-            <div class="col-md-4">
-                <strong>Example 2 : Async Await</strong>
-                <hr>
-                <button (click)="fetchDataWithAsyncAwait()" type="button" class="btn btn-primary">Buy Laptop</button>
-                <hr>
-                <div #div2>Data</div>
-            </div>
-            <div class="col-md-4">
-                <strong>Example 3 : Fetch Api</strong>
-                <hr>
-                <button (click)="fetchPosts()"  type="button" class="btn btn-primary">Buy Laptop</button>
-                <hr>
-                <div #div3>Data</div>
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Example 1 : Promise</strong>
+                </div>
+                <div class="card-body">
+                    <button (click)="fetchDataWithPromise()" type="button" class="btn btn-primary mb-3">Buy
+                        Laptop</button>
+                    <div #div1 class="alert alert-info">Data</div>
+                </div>
             </div>
         </div>
-    <!-- </div>
-</div> -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Example 2 : Async Await</strong>
+                </div>
+                <div class="card-body">
+                    <button (click)="fetchDataWithAsyncAwait()" type="button" class="btn btn-primary mb-3">Buy
+                        Laptop</button>
+                    <div #div2 class="alert alert-info">Data</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Example 3 : Fetch Api</strong>
+                </div>
+                <div class="card-body">
+                    <button (click)="fetchPosts()" type="button" class="btn btn-primary mb-3">Buy Laptop</button>
+                    <div #div3 class="alert alert-info">Data</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

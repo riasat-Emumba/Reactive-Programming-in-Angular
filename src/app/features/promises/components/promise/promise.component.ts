@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { PromiseService } from '../../services/promise.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class PromiseComponent {
   promiseStateExample2: string = "Pending";
   promiseStateExample3: string = "Pending";
   laptopPurchased: string = "Buying laptop please wait ....";
+
   ngOnInit(): void {
     // Function Example
     this.buyLaptop()
