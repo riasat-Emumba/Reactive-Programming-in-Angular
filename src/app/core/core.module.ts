@@ -15,6 +15,7 @@ import { ContentComponent } from './components/content/content.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -38,6 +39,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   exports: [
     HeaderComponent,
+    MatSnackBarModule,
     FooterComponent,
   ]
 })

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: PATHS.AUTH.HOME, component: ContentComponent, canActivate: [authGuard] },
   {
     path: PATHS.DASHBOARDS.PROMISE,
-    loadChildren: () => import('./features/promises/promises.module').then(m => m.PromisesModule), data: { preload: false }
+    loadChildren: () => import('./features/promises/promises.module').then(m => m.PromisesModule), data: { preload: true }
   },
   {
     path: PATHS.DASHBOARDS.RXJS,

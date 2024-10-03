@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttperrorInterceptor } from './core/intercepters/httperror.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -16,8 +16,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    HttpClientModule,
-    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [
