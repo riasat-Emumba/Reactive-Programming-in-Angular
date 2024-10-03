@@ -21,8 +21,6 @@ import { MergeMapComponent } from './components/merge-map/merge-map.component';
 import { ConcatMapComponent } from './components/concat-map/concat-map.component';
 import { CompareMapsComponent } from './components/compare-maps/compare-maps.component';
 import { MapsInActionComponent } from './components/maps-in-action/maps-in-action.component';
-import { MatListModule } from '@angular/material/list';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ExhaustMapComponent } from './components/exhaust-map/exhaust-map.component';
 import { ShareReplyComponent } from './components/share-reply/share-reply.component';
 import { CombineLatestComponent } from './components/combine-latest/combine-latest.component';
@@ -32,6 +30,7 @@ import { OperatorsIntroComponent } from './components/operators-intro/operators-
 import { DataListComponent } from './components/data-list/data-list.component';
 import { SuperUserListComponent } from './components/super-user-list/super-user-list.component';
 import { PhotocardComponent } from './components/photocard/photocard.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -67,8 +66,7 @@ import { PhotocardComponent } from './components/photocard/photocard.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    MatListModule,
+    SharedModule,
     RxjsOperatorsRoutingModule
   ]
 })

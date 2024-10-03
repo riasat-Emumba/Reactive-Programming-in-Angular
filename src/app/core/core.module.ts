@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ErrorSnackbarComponent } from './components/error-snackbar/error-snackbar.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     HeaderComponent,
