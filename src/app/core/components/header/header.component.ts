@@ -12,8 +12,8 @@ import { PATHS } from '../../constants/routes.constants';
 })
 export class HeaderComponent {
 
-  welcomeMsg = MESSAGES['WELCOME'];
-  projectName = MESSAGES['PROJECT_NAME'];
+  welcomeMsg = MESSAGES.WELCOME;
+  projectName = MESSAGES.PROJECT_NAME;
   isLoggedIn: boolean = false;
   private subscription!: Subscription;
 

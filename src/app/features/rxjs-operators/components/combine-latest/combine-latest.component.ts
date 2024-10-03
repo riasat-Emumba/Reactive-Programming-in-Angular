@@ -1,85 +1,76 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, fromEvent, Observable } from 'rxjs';
-import { catchError, map, pluck, withLatestFrom } from 'rxjs/operators';
-
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { combineLatest } from 'rxjs';
+import { map, startWith, withLatestFrom } from 'rxjs/operators';
+import { IResult } from '../../models/iresult';
 
 @Component({
   selector: 'app-combine-latest',
   templateUrl: './combine-latest.component.html',
-  styleUrls: ['./combine-latest.component.scss']
+  styleUrls: ['./combine-latest.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CombineLatestComponent implements OnInit, AfterViewInit {
+export class CombineLatestComponent implements OnInit {
 
   nameSource = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];
   colorSource = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
-
-  @ViewChild('name') name!: ElementRef<HTMLSelectElement>;
-  @ViewChild('color') color!: ElementRef<HTMLSelectElement>;
+  nameControl = new FormControl('Ali');
+  colorControl = new FormControl('red');
+  color!: string;
+  name!: string;
+  combineLatestList: IResult[] = [];
+  withLatestFromList: IResult[] = [];
 
   constructor() { }
 
-  ngOnInit(): void { }
-
-  ngAfterViewInit(): void {
-    this.combineLatestOperator();
-    this.withLatestFromOperator();
+  ngOnInit(): void {
+    this.setupCombineLatest();
+    this.setupWithLatestFrom();
   }
 
-  nameEvent(): Observable<string> {
-    return fromEvent<Event>(this.name.nativeElement, 'change').pipe(
-      pluck('target', 'value'),
-      map(value => value as string),
-      catchError(error => {
-        console.error('Error in nameEvent:', error);
-        return [];
-      })
-    );
+  setupCombineLatest() {
+    combineLatest([
+      this.nameControl.valueChanges.pipe(startWith(this.nameControl.value)),
+      this.colorControl.valueChanges.pipe(startWith(this.colorControl.value))
+    ])
+      .pipe(
+        map(([name, color]) => ({ name, color }))
+      )
+      .subscribe(result => {
+        console.log(result);
+        if (result.name && result.color) {
+          this.color = result.color;
+          this.combineLatestList.push(result as IResult);
+        }
+      });
   }
 
-  colorEvent(): Observable<string> {
-    return fromEvent<Event>(this.color.nativeElement, 'change').pipe(
-      map(event => (event.target as HTMLSelectElement).value),
-      catchError(error => {
-        console.error('Error in colorEvent:', error);
-        return [];
-      })
-    );
+  setupWithLatestFrom() {
+    this.nameControl.valueChanges
+      .pipe(
+        withLatestFrom(this.colorControl.valueChanges.pipe(startWith(this.colorControl.value))), // Use current value
+        map(([name, color]) => ({ name, color }))
+      )
+      .subscribe(result => {
+        if (result.name && result.color) {
+          this.color = result.color;
+          this.withLatestFromList.push(result as IResult);
+        }
+      });
   }
 
-  withLatestFromOperator(): void {
-    this.nameEvent().pipe(
-      withLatestFrom(this.colorEvent())
-    ).subscribe(([name, color]) => {
-      console.log(name, color);
-      this.createBox(name, color, 'withLatestFromContainer');
-    })
+  trackByIndex(index: number): number {
+    return index;
   }
 
-  combineLatestOperator(): void {
-    combineLatest([this.nameEvent(), this.colorEvent()]).subscribe({
-      next: ([name, color]) => {
-        console.log(name, color);
-        this.createBox(name, color, 'combineLatestContainer');
-      },
-      error: (error) => {
-        console.error('Error in combineLatestOperator:', error);
-      }
-    });
+  trackByName(index: number, name: string): string {
+    console.log("name:", name);
+
+    return name;
   }
 
-  createBox(name: string, color: string, containerId: string) {
-    let el = document.createElement('div');
-    el.innerText = name;
-    el.style.backgroundColor = color;
-    el.style.color = 'white';
-    el.style.padding = '10px';
-    el.style.margin = '5px';
-    el.style.borderRadius = '5px';
-    el.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
-    el.style.display = 'inline-block';
-    el.style.fontSize = '16px';
-    el.style.fontWeight = 'bold';
-    document.getElementById(containerId)?.appendChild(el);
+  trackByColor(index: number, color: string): string {
+    console.log("color:", color);
+    return color;
   }
-
 }

@@ -10,7 +10,6 @@ export class AuthService {
 
   constructor() { }
 
-  private readonly LOGIN_STATUS_KEY = LOGIN_STATUS_KEY;
   private loggedIn = new BehaviorSubject<boolean>(this.getLoginState());
   loggedIn$ = this.loggedIn.asObservable();
 
@@ -31,11 +30,11 @@ export class AuthService {
   }
 
   private getLoginState(): boolean {
-    return localStorage.getItem(this.LOGIN_STATUS_KEY) === 'true';
+    return localStorage.getItem(LOGIN_STATUS_KEY) === 'true';
   }
 
   private setLoginState(isLoggedIn: boolean): void {
-    localStorage.setItem(this.LOGIN_STATUS_KEY, isLoggedIn.toString());
+    localStorage.setItem(LOGIN_STATUS_KEY, isLoggedIn.toString());
     this.loggedIn.next(isLoggedIn);
   }
 
