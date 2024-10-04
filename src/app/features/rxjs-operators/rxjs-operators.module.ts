@@ -30,7 +30,7 @@ import { OperatorsIntroComponent } from './components/operators-intro/operators-
 import { DataListComponent } from './components/data-list/data-list.component';
 import { SuperUserListComponent } from './components/super-user-list/super-user-list.component';
 import { PhotocardComponent } from './components/photocard/photocard.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    ReactiveFormsModule,
     RxjsOperatorsRoutingModule
   ]
 })

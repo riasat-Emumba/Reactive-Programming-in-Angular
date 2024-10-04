@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttperrorInterceptor } from './core/intercepters/httperror.interceptor';
 
 @NgModule({
@@ -12,9 +12,10 @@ import { HttperrorInterceptor } from './core/intercepters/httperror.interceptor'
     AppComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     CoreModule,
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
     BrowserAnimationsModule
   ],
   providers: [
