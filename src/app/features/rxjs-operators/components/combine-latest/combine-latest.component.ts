@@ -16,8 +16,6 @@ export class CombineLatestComponent implements OnInit {
   colorSource = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
   nameControl = new FormControl('Ali');
   colorControl = new FormControl('red');
-  color!: string;
-  name!: string;
   combineLatestList: IResult[] = [];
   withLatestFromList: IResult[] = [];
 
@@ -39,7 +37,6 @@ export class CombineLatestComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         if (result.name && result.color) {
-          this.color = result.color;
           this.combineLatestList.push(result as IResult);
         }
       });
@@ -48,12 +45,11 @@ export class CombineLatestComponent implements OnInit {
   setupWithLatestFrom() {
     this.nameControl.valueChanges
       .pipe(
-        withLatestFrom(this.colorControl.valueChanges.pipe(startWith(this.colorControl.value))), // Use current value
+        withLatestFrom(this.colorControl.valueChanges.pipe(startWith(this.colorControl.value))),
         map(([name, color]) => ({ name, color }))
       )
       .subscribe(result => {
         if (result.name && result.color) {
-          this.color = result.color;
           this.withLatestFromList.push(result as IResult);
         }
       });

@@ -56,7 +56,7 @@ export class RetryComponent implements OnInit {
   getUserDetailsUsingRetry() {
     this.statusUsingRetry = USER_STATUS_MESSAGES.FETCHING
     this.apiService.getUsersDetail().pipe(
-      retry(2)
+      retry(RETRY_LIMIT)
     ).subscribe({
       next: (res => {
         console.log(res);

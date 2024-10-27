@@ -1,65 +1,86 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable, fromEvent, pluck, map, catchError, zip, forkJoin, } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { zip, forkJoin, startWith, take } from 'rxjs';
+import { IResult } from '../../models/iresult';
 
 @Component({
   selector: 'app-zip',
   templateUrl: './zip.component.html',
-  styleUrls: ['./zip.component.scss']
+  styleUrls: ['./zip.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ZipComponent {
+export class ZipComponent implements OnInit {
 
-  // nameOptions = ["Ali", "Ahmed", "Kashif", "Nasir", "Noman"];
-  // colorOptions = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
-  nameOptions = ["Ali", "Ahmed", "Kashif"];
-  colorOptions = ['red', 'green', 'blue', 'yellow'];
+  nameSource = ["Ali", "Ahmed", "Kashif"];
+  colorSource = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'purple', 'pink', 'brown', 'gray'];
+  nameControl = new FormControl('Ali');
+  colorControl = new FormControl('red');
+  zipList: IResult[] = [];
+  forkJoinList: IResult[] = [];
 
-  @ViewChild('name') nameSelect!: ElementRef<HTMLSelectElement>;
-  @ViewChild('color') colorSelect!: ElementRef<HTMLSelectElement>;
-
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.initializeZipOperator();
-    this.initializeForkJoinOperator();
+    // this.initializeForkJoinOperator();
   }
 
-  private nameChangeEvent(): Observable<string> {
-    return fromEvent<Event>(this.nameSelect.nativeElement, 'change').pipe(
-      pluck('target', 'value'),
-      map(value => value as string),
-      catchError(error => {
-        console.error('Error in nameChangeEvent:', error);
-        return []; // Return an empty array for handling errors
-      })
-    );
-  }
-
-  private colorChangeEvent(): Observable<string> {
-    return fromEvent<Event>(this.colorSelect.nativeElement, 'change').pipe(
-      map(event => (event.target as HTMLSelectElement).value),
-      catchError(error => {
-        console.error('Error in colorChangeEvent:', error);
-        return []; // Return an empty array for handling errors
-      })
-    );
-  }
-
-  private initializeForkJoinOperator(): void {
-    forkJoin([this.nameChangeEvent(), this.colorChangeEvent()]).subscribe({
-      next: ([name, color]) => {
-        console.log(name, color);
-        this.createBox(name, color, 'forkJoinContainer');
+  executingColorsObserver() {
+    const source2$ = this.colorControl.valueChanges.pipe(startWith(this.colorControl.value), take(5));
+    source2$.subscribe({
+      next: (color) => {
+        console.log("color: ", color);
       },
       error: (err) => {
         console.error('Error in forkJoinOperator:', err);
+      }, complete: () => {
+        console.log("Color Stream Completed");
+      }
+    })
+    return source2$;
+  }
+
+  executingNamesObserver() {
+    const source1$ = this.nameControl.valueChanges.pipe(startWith(this.nameControl.value), take(2));
+    source1$.subscribe({
+      next: (name) => {
+        console.log("name: ", name);
+      },
+      error: (err) => {
+        console.error('Error in forkJoinOperator:', err);
+      }, complete: () => {
+        console.log("Name Stream Completed",);
+      }
+    });
+    return source1$;
+  }
+
+  private initializeForkJoinOperator(): void {
+    const source1$ = this.executingNamesObserver();
+    const source2$ = this.executingColorsObserver();
+
+    forkJoin([source1$, source2$]).subscribe({
+      next: ([name, color]) => {
+        console.log("name: ", name, "color: ", color);
+        if (name && color)
+          this.forkJoinList.push({ name, color });
+      },
+      error: (err) => {
+        console.error('Error in forkJoinOperator:', err);
+      }, complete: () => {
+        console.log("Fork Join Completed");
+
       }
     });
   }
 
   private initializeZipOperator(): void {
-    zip(this.nameChangeEvent(), this.colorChangeEvent()).subscribe({
+    const source1$ = this.nameControl.valueChanges.pipe(startWith(this.nameControl.value));
+    const source2$ = this.colorControl.valueChanges.pipe(startWith(this.colorControl.value));
+    zip(source1$, source2$).subscribe({
       next: ([name, color]) => {
         console.log(name, color);
-        this.createBox(name, color, 'zipContainer');
+        if (name && color)
+          this.zipList.push({ name, color });
       },
       error: (err) => {
         console.error('Error in zipOperator:', err);
@@ -67,19 +88,5 @@ export class ZipComponent {
     });
   }
 
-  private createBox(name: string, color: string, containerId: string): void {
-    const boxElement = document.createElement('div');
-    boxElement.innerText = name;
-    boxElement.style.backgroundColor = color;
-    boxElement.style.color = 'white';
-    boxElement.style.padding = '10px';
-    boxElement.style.margin = '5px';
-    boxElement.style.borderRadius = '5px';
-    boxElement.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
-    boxElement.style.display = 'inline-block';
-    boxElement.style.fontSize = '16px';
-    boxElement.style.fontWeight = 'bold';
-    document.getElementById(containerId)?.appendChild(boxElement);
-  }
 
 }

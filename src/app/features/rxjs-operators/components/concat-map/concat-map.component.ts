@@ -21,8 +21,8 @@ export class ConcatMapComponent {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.fetchUsersUsingMap();
-    this.fetchUsersUsingMapAndConcatAll();
+    // this.fetchUsersUsingMap();
+    // this.fetchUsersUsingMapAndConcatAll();
     this.fetchUsersUsingConcatMap();
   }
 

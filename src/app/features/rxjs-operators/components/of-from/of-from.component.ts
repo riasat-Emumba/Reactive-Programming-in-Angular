@@ -35,7 +35,7 @@ export class OfFromComponent implements OnInit {
 
   private demonstrateOfOperator(): void {
     const numberArray = [{ a: 10 }, { b: 20 }, { c: 30 }, { d: 40 }, { e: 50 }];
-    const numberArray$ = of(...numberArray); // Spread operator to emit each object separately
+    const numberArray$ = of(numberArray);
 
     numberArray$.subscribe({
       next: (value) => console.log(value),

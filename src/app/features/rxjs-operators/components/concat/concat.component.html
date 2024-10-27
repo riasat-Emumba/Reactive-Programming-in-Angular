@@ -1,4 +1,4 @@
-<section class="container mt-4 p-4 bg-light rounded">
+<section class="bg-light rounded">
     <app-operators-intro>
         <p heading>Concat Operator </p>
         The concat operator adds multiple streams sequentially. Once the first stream finishes emitting data, the
@@ -6,7 +6,7 @@
         stream begins.
     </app-operators-intro>
 
-    <div class="row">
+    <div class="row mx-2">
         <article class="col-md-4 mb-4">
             <div class="card h-100">
                 <div class="card-header">
@@ -52,7 +52,7 @@
             <div class="card">
                 <div class="card-header">Your Channel (Subscribers)</div>
                 <div class="card-body">
-                    <!-- Add content here -->
+                    <app-data-list [dataList]="finalStreamData"></app-data-list>
                 </div>
             </div>
         </div>

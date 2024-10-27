@@ -3,7 +3,7 @@
   We can transform our data with Map operator.
   With observables we need pipe to use map while with arrays and iterables we donot need pipe operator.
 </app-operators-intro>
-<div class="row">
+<div class="row mx-2">
   <div class="col-md-6">
     <div class="card">
       <div class="card-header">
@@ -17,6 +17,14 @@
             </li>
           </ul>
         </ng-container>
+        <!-- Diiferent way to subscribe -->
+        <!-- <ng-container *ngIf="originalUsers$ | async">
+          <ul class="list-group">
+            <li *ngFor="let user of (originalUsers$ | async )" class="list-group-item">
+              <app-user-detail [user]="user"></app-user-detail>
+            </li>
+          </ul>
+        </ng-container> -->
       </div>
     </div>
   </div>
@@ -27,7 +35,7 @@
         Modified User's Data
       </div>
       <div class="card-body">
-        <ng-container *ngIf="transformedUsers$ | async as transformedUsers">
+        <ng-container *ngIf="transformedUsers$ | async; let transformedUsers">
           <ul class="list-group">
             <li *ngFor="let user of transformedUsers" class="list-group-item">
               <app-user-detail [user]="user"></app-user-detail>

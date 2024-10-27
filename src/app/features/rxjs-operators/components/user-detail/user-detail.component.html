@@ -15,6 +15,10 @@
     <div class="col-md-4"><strong>Last Name:</strong></div>
     <div class="col-md-8 text-end">{{ user.lastname }}</div>
   </div>
+  <div class="row mb-1" *ngIf="user.name">
+    <div class="col-md-4"><strong>Name:</strong></div>
+    <div class="col-md-8 text-end">{{ user.name }}</div>
+  </div>
   <div class="row mb-1" *ngIf="user.membershipLevel ">
     <div class="col-md-4"><strong>Membership:</strong></div>
     <div class="col-md-8 text-end">{{ user.membershiplevel }}</div>
