@@ -18,9 +18,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
   ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatIconModule,
     PromisesRoutingModule
   ]
 })

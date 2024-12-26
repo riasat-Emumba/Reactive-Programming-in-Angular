@@ -22,6 +22,7 @@ export class DebounceTimeComponent implements AfterViewInit {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
+
   private setupSearchInput1(): void {
     const searchTerm$: Observable<Event> = fromEvent(this.searchInput1.nativeElement, 'input');
 

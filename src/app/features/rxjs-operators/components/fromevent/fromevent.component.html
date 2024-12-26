@@ -1,36 +1,8 @@
-<div class="container mt-4">
-    <h3 class="text-primary"><strong>Observable Stream</strong></h3>
-    <ul class="list-group mb-4">
-        <li class="list-group-item">User Input (Button click Event)</li>
-        <li class="list-group-item">Http Request</li>
-        <li class="list-group-item">Array</li>
-        <li class="list-group-item">Object</li>
-    </ul>
-    <h3 class="text-primary"><strong>Observable Handle</strong></h3>
-    <ul class="list-group mb-4">
-        <li class="list-group-item">Data</li>
-        <li class="list-group-item">Error</li>
-        <li class="list-group-item">Completion</li>
-    </ul>
-    <p class="text-secondary">Subscribe gives three methods namely:</p>
-    <pre class="bg-light p-3">
-            <code>
-    .subscribe(
-        (data) => console.log(data),
-        (error) => console.log(error),
-        () => console.log('Complete')
-    )
-            </code>
-        </pre>
-</div>
-
-
-
 <app-operators-intro>
     <p heading>FromEvent</p>
     FromEvent operator allows us to create an observable from a DOM event
 </app-operators-intro>
-<div class="row">
+<div class="row mx-2">
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
@@ -62,4 +34,28 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row mt-1 mx-2">
+    <h3 class="text-primary"><strong>Observable Stream</strong></h3>
+    <ul class="list-group mb-4 mx-2">
+        <li class="list-group-item">User Input (Button click Event)</li>
+        <li class="list-group-item">Http Request</li>
+        <li class="list-group-item">Array</li>
+        <li class="list-group-item">Object</li>
+    </ul>
+    <h3 class="text-primary"><strong>Observable Handle</strong></h3>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">Data</li>
+        <li class="list-group-item">Error</li>
+        <li class="list-group-item">Completion</li>
+    </ul>
+    <p class="text-secondary">Subscribe gives three methods namely:</p>
+    <pre class="bg-light p-3">
+            <code>
+    .subscribe(
+        (data) => console.log(data),
+        (error) => console.log(error),
+        () => console.log('Complete'))
+            </code>
+        </pre>
 </div>

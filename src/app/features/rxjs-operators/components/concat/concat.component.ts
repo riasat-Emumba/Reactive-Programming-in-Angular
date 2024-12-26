@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concat } from 'rxjs';
+import { concat, Subscription } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { VIDEO_CATEGORIES } from 'src/app/core/constants/categories.constants';
 
@@ -9,6 +9,8 @@ import { VIDEO_CATEGORIES } from 'src/app/core/constants/categories.constants';
   styleUrls: ['./concat.component.scss']
 })
 export class ConcatComponent implements OnInit {
+  finalStreamData: string[] = [];
+  private subscription: Subscription = new Subscription();
 
   constructor(private apiService: ApiService) { }
 
@@ -22,9 +24,14 @@ export class ConcatComponent implements OnInit {
     const newsStream = this.apiService.getVideoStream(VIDEO_CATEGORIES.NEWS, 4);
 
     const finalStream = concat(techStream, comedyStream, newsStream);
-    finalStream.subscribe(video => {
+    this.subscription = finalStream.subscribe(video => {
+      this.finalStreamData.push(video);
       console.log(video);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 
